@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(description = "El controlador index.", urlPatterns = { "/index" })
-public class IndexController extends HttpServlet {
+@WebServlet(description = "El controller de entrar", urlPatterns = { "/entrar" })
+public class EntrarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("html/index.html").forward(request, response);
+		request.getRequestDispatcher("html/entrar.html").forward(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
-	
+
 }
