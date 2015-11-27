@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -35,22 +37,8 @@
 					<div class="well_transparente">
 						<div class="panel panel-default">
 							<div class="panel-body" align="left">
-								<h2>Formulario de registro</h2>
-								<form action="registro" method="post">
-									<div class="form-group">
-								    	<label for="nombreUsuario">Nombre de usuario</label>
-								    	<input type="text" name="nombreUsuario" class="form-control" id="nombreUsuario" placeholder="Nombre de usuario" required>
-								  	</div>
-									<div class="form-group">
-								    	<label for="email">Email</label>
-								    	<input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
-								  	</div>
-									<div class="form-group">
-								    	<label for="contraseña">Contraseña</label>
-								    	<input type="password" name="contraseña" class="form-control" id="contraseña" placeholder="Contraseña" required>
-								  	</div>
-									<button type="submit" class="btn btn-default">Registrarse</button>
-								</form>
+								<h1>Error</h1>
+								<h2>Ya existe un usuario asociado a ese correo electr&oacute;nico.</h2>
 							</div>
 						</div>
 					</div>
