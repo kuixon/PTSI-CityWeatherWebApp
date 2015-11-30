@@ -42,7 +42,11 @@
 							UsuarioModel um = (UsuarioModel) request.getAttribute("usuario");
 							%>
 							<h3 align="justify">Ya existe un usuario asociado al email: <%= um.getEmail() %>.</h3>
-						  	<p>Haz click <a href="/CityWeatherWebApp/registro" class="alert-link">aqu&iacute;</a> para volver al formulario de registro.</p>
+							<form action="registro" method="get">
+								<input type="hidden" name="nombreUsuario" value="<%= um.getNombreUsuario()%>">
+							  	<p>Pulsa el siguiente bot&oacute;n para volver al formulario:</p>
+							  	<button type="submit" class="btn btn-default">Registro</button>
+							</form>
 						</div>
 					</div>
 				</div>

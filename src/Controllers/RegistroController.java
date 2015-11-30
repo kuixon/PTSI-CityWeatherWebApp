@@ -18,7 +18,32 @@ public class RegistroController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("html/registro.html").forward(request, response);
+		
+		String nombreUsuario;
+		if(request.getParameter("nombreUsuario") != null) {
+			nombreUsuario = request.getParameter("nombreUsuario");
+		} else {
+			nombreUsuario = "";
+		}
+		
+		String email;
+		if(request.getParameter("email") != null) {
+			email = request.getParameter("email");
+		} else {
+			email = "";
+		}
+		
+		String contraseña;
+		if(request.getParameter("contraseña") != null) {
+			contraseña = request.getParameter("contraseña");
+		} else {
+			contraseña = "";
+		}
+		
+		UsuarioModel um = new UsuarioModel(nombreUsuario, email, contraseña);
+		
+		request.setAttribute("usuario", um);
+		request.getRequestDispatcher("jsp/registro.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
