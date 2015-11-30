@@ -32,7 +32,7 @@
 				<div class="container-fluid">
 					<ul class="nav navbar-nav navbar-left">
 						<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-						<li class="active"><a href="#">Inicio<span class="sr-only">(current)</span></a></li>
+						<li><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
 						<li><a href="#">Ciudades favoritas</a></li>
 					</ul>
 					<div class="nav navbar-nav navbar-right">
@@ -51,20 +51,18 @@
 				<div class="col-xs-4"></div>
 				<div class="col-xs-4">
 					<div class="well_transparente">
-						<div class="panel panel-default">
-							<div class="panel-body" align="left">
-								<%
-								UsuarioModel um = (UsuarioModel) request.getAttribute("usuario");
-								%>
-								<h1>¡Enhorabuena <%= um.getNombreUsuario() %>!</h1>
-								<h3>Te has registrado correctamente con los siguientes datos:</h3>
-								<ul class="list-group">
-									<li class="list-group-item list-group-item-success"><strong>Nombre de usuario</strong>: <%= um.getNombreUsuario() %></li>
-									<li class="list-group-item list-group-item-info"><strong>Email</strong>: <%= um.getEmail() %></li>
-									<li class="list-group-item list-group-item-danger"><strong>Contraseña</strong>: <input type="button" value="Mostrar contraseña" class="btn btn-default" id="contraseñaBoton" /> </li>
-									<li class="list-group-item" id="contraseñaTexto" style="display: none;">La contraseña elegida en el registro es: <strong><%= um.getContraseña() %></strong></li>
-								</ul>
-							</div>
+						<div class="alert alert-success" role="alert">
+							<%
+							UsuarioModel um = (UsuarioModel) request.getAttribute("usuario");
+							%>
+							<h1>¡Enhorabuena <%= um.getNombreUsuario() %>!</h1>
+							<h3>Te has registrado correctamente con los siguientes datos:</h3>
+							<ul class="list-group">
+								<li class="list-group-item list-group-item-warning"><strong>Nombre de usuario</strong>: <%= um.getNombreUsuario() %></li>
+								<li class="list-group-item list-group-item-info"><strong>Email</strong>: <%= um.getEmail() %></li>
+								<li class="list-group-item list-group-item-danger"><strong>Contraseña</strong>: <input type="button" value="Mostrar contraseña" class="btn btn-default" id="contraseñaBoton" /> </li>
+								<li class="list-group-item" id="contraseñaTexto" style="display: none;">La contraseña elegida en el registro es: <strong><%= um.getContraseña() %></strong></li>
+							</ul>
 						</div>
 					</div>
 				</div>

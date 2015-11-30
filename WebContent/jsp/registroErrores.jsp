@@ -17,7 +17,7 @@
 				<div class="container-fluid">
 					<ul class="nav navbar-nav navbar-left">
 						<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-						<li class="active"><a href="#">Inicio<span class="sr-only">(current)</span></a></li>
+						<li><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
 						<li><a href="#">Ciudades favoritas</a></li>
 					</ul>
 					<div class="nav navbar-nav navbar-right">
@@ -36,14 +36,13 @@
 				<div class="col-xs-4"></div>
 				<div class="col-xs-4">
 					<div class="well_transparente">
-						<div class="panel panel-default">
-							<div class="panel-body" align="left">
-								<%
-								UsuarioModel um = (UsuarioModel) request.getAttribute("usuario");
-								%>
-								<h1>Error</h1>
-								<h2>Ya existe un usuario asociado al email: <%= um.getEmail() %>.</h2>
-							</div>
+						<div class="alert alert-danger" role="alert">
+							<h1 align="center">Error</h1>
+							<%
+							UsuarioModel um = (UsuarioModel) request.getAttribute("usuario");
+							%>
+							<h3 align="justify">Ya existe un usuario asociado al email: <%= um.getEmail() %>.</h3>
+						  	<p>Haz click <a href="/CityWeatherWebApp/registro" class="alert-link">aqu&iacute;</a> para volver al formulario de registro.</p>
 						</div>
 					</div>
 				</div>
