@@ -37,7 +37,7 @@
 				<div class="col-xs-4">
 					<div class="well_transparente">
 						<div class="alert alert-danger" role="alert">
-							<h1 align="center">Error</h1>
+							<h1 align="center">¡Error!</h1>
 							<%
 							UsuarioModel um = (UsuarioModel) request.getAttribute("usuario");
 							%>

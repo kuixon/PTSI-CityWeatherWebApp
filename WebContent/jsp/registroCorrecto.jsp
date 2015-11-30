@@ -61,7 +61,7 @@
 								<li class="list-group-item list-group-item-warning"><strong>Nombre de usuario</strong>: <%= um.getNombreUsuario() %></li>
 								<li class="list-group-item list-group-item-info"><strong>Email</strong>: <%= um.getEmail() %></li>
 								<li class="list-group-item list-group-item-danger"><strong>Contraseña</strong>: <input type="button" value="Mostrar contraseña" class="btn btn-default" id="contraseñaBoton" /> </li>
-								<li class="list-group-item" id="contraseñaTexto" style="display: none;">La contraseña elegida en el registro es: <strong><%= um.getContraseña() %></strong></li>
+								<li class="list-group-item" id="contraseñaTexto" style="display: none;">La contraseña elegida en el registro ha sido: <strong><%= um.getContraseña() %></strong></li>
 							</ul>
 						</div>
 					</div>
