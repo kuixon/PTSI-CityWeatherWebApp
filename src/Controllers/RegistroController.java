@@ -26,12 +26,15 @@ public class RegistroController extends HttpServlet {
 		String email = request.getParameter("email");
 		String contraseña = request.getParameter("contraseña");
 		
+		UsuarioModel um = new UsuarioModel(nombreUsuario, email, contraseña);
+		
 		try {
 			if (DatabaseManager.getInstance().existeUsuarioConEmail(email)) {
+				request.setAttribute("usuario", um);
 				request.getRequestDispatcher("jsp/registroErrores.jsp").forward(request, response);
 			} else {
-				UsuarioModel um = new UsuarioModel(nombreUsuario, email, contraseña);
 				DatabaseManager.getInstance().insertarUsuario(um);
+				request.setAttribute("usuario", um);
 				request.getRequestDispatcher("jsp/registroCorrecto.jsp").forward(request, response);
 			}
 		} catch (SQLException e1) {

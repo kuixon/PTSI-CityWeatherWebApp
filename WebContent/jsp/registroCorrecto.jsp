@@ -1,3 +1,4 @@
+<%@page import="Models.UsuarioModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -9,6 +10,21 @@
 		<link type="text/css" rel="stylesheet" href="./css/cityweatherwebapp.css" />
 		<link type="text/css" rel="stylesheet" href="./css/bootstrap.min.css" />
 		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#contraseñaBoton").click(function() {
+					$("#contraseñaTexto").slideToggle("slow",function () {
+				    });
+					
+					if ($("#contraseñaBoton").val() == 'Mostrar contraseña') {
+						$("#contraseñaBoton").prop('value', 'Ocultar contraseña');
+					} else {
+						$("#contraseñaBoton").prop('value', 'Mostrar contraseña');
+					}
+			    });
+			});
+		</script>
 	</head>
 	<body>
 		<div>
@@ -37,8 +53,17 @@
 					<div class="well_transparente">
 						<div class="panel panel-default">
 							<div class="panel-body" align="left">
-								<h1>¡Enhorabuena!</h1>
-								<h2>Te has registrado correctamente.</h2>
+								<%
+								UsuarioModel um = (UsuarioModel) request.getAttribute("usuario");
+								%>
+								<h1>¡Enhorabuena <%= um.getNombreUsuario() %>!</h1>
+								<h3>Te has registrado correctamente con los siguientes datos:</h3>
+								<ul class="list-group">
+									<li class="list-group-item list-group-item-success"><strong>Nombre de usuario</strong>: <%= um.getNombreUsuario() %></li>
+									<li class="list-group-item list-group-item-info"><strong>Email</strong>: <%= um.getEmail() %></li>
+									<li class="list-group-item list-group-item-danger"><strong>Contraseña</strong>: <input type="button" value="Mostrar contraseña" class="btn btn-default" id="contraseñaBoton" /> </li>
+									<li class="list-group-item" id="contraseñaTexto" style="display: none;">La contraseña elegida en el registro es: <strong><%= um.getContraseña() %></strong></li>
+								</ul>
 							</div>
 						</div>
 					</div>

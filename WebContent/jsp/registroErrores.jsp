@@ -1,3 +1,4 @@
+<%@page import="Models.UsuarioModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -37,8 +38,11 @@
 					<div class="well_transparente">
 						<div class="panel panel-default">
 							<div class="panel-body" align="left">
+								<%
+								UsuarioModel um = (UsuarioModel) request.getAttribute("usuario");
+								%>
 								<h1>Error</h1>
-								<h2>Ya existe un usuario asociado a ese correo electr&oacute;nico.</h2>
+								<h2>Ya existe un usuario asociado al email: <%= um.getEmail() %>.</h2>
 							</div>
 						</div>
 					</div>
