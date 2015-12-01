@@ -1,6 +1,7 @@
 <%@page import="Models.UsuarioModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<jsp:useBean id="usuario" class="Models.UsuarioModel" scope="request"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -52,16 +53,13 @@
 				<div class="col-xs-4">
 					<div class="well_transparente">
 						<div class="alert alert-success" role="alert">
-							<%
-							UsuarioModel um = (UsuarioModel) request.getAttribute("usuario");
-							%>
-							<h1>¡Enhorabuena <%= um.getNombreUsuario() %>!</h1>
+							<h1>¡Enhorabuena <jsp:getProperty property="nombreUsuario" name="usuario"/>!</h1>
 							<h3>Te has registrado correctamente con los siguientes datos:</h3>
 							<ul class="list-group">
-								<li class="list-group-item list-group-item-warning"><strong>Nombre de usuario</strong>: <%= um.getNombreUsuario() %></li>
-								<li class="list-group-item list-group-item-info"><strong>Email</strong>: <%= um.getEmail() %></li>
+								<li class="list-group-item list-group-item-warning"><strong>Nombre de usuario</strong>: <jsp:getProperty property="nombreUsuario" name="usuario"/></li>
+								<li class="list-group-item list-group-item-info"><strong>Email</strong>: <jsp:getProperty property="email" name="usuario"/></li>
 								<li class="list-group-item list-group-item-danger"><strong>Contraseña</strong>: <input type="button" value="Mostrar contraseña" class="btn btn-default" id="contraseñaBoton" /> </li>
-								<li class="list-group-item" id="contraseñaTexto" style="display: none;">La contraseña elegida en el registro ha sido: <strong><%= um.getContraseña() %></strong></li>
+								<li class="list-group-item" id="contraseñaTexto" style="display: none;">La contraseña elegida en el registro ha sido: <strong><jsp:getProperty property="contraseña" name="usuario"/></strong></li>
 							</ul>
 						</div>
 					</div>

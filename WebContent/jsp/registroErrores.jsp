@@ -1,6 +1,7 @@
 <%@page import="Models.UsuarioModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<jsp:useBean id="usuario" class="Models.UsuarioModel" scope="request"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -38,12 +39,9 @@
 					<div class="well_transparente">
 						<div class="alert alert-danger" role="alert">
 							<h1 align="center">¡Error!</h1>
-							<%
-							UsuarioModel um = (UsuarioModel) request.getAttribute("usuario");
-							%>
-							<h3 align="justify">Ya existe un usuario asociado al email: <%= um.getEmail() %>.</h3>
+							<h3 align="justify">Ya existe un usuario asociado al email: <jsp:getProperty property="email" name="usuario"/>.</h3>
 							<form action="registro" method="get">
-								<input type="hidden" name="nombreUsuario" value="<%= um.getNombreUsuario()%>">
+								<input type="hidden" name="nombreUsuario" value="<jsp:getProperty property="nombreUsuario" name="usuario"/>">
 							  	<p>Pulsa el siguiente bot&oacute;n para volver al formulario:</p>
 							  	<button type="submit" class="btn btn-default">Registro</button>
 							</form>

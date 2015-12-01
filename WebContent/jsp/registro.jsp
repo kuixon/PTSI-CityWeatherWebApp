@@ -1,6 +1,7 @@
 <%@page import="Models.UsuarioModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<jsp:useBean id="usuario" class="Models.UsuarioModel" scope="request"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -40,20 +41,17 @@
 							<div class="panel-body" align="left">
 								<h2>Formulario de registro</h2>
 								<form action="registro" method="post">
-									<% 
-									UsuarioModel um = (UsuarioModel) request.getAttribute("usuario"); 
-									%>
 									<div class="form-group">
 								    	<label for="nombreUsuario">Nombre de usuario</label>
-								    	<input type="text" name="nombreUsuario" class="form-control" id="nombreUsuario" placeholder="Nombre de usuario" value="<%= um.getNombreUsuario() %>" required>
+								    	<input type="text" name="nombreUsuario" class="form-control" id="nombreUsuario" placeholder="Nombre de usuario" value="<jsp:getProperty property="nombreUsuario" name="usuario"/>" required>
 								  	</div>
 									<div class="form-group">
 								    	<label for="email">Email</label>
-								    	<input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<%= um.getEmail() %>" required>
+								    	<input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<jsp:getProperty property="email" name="usuario"/>" required>
 								  	</div>
 									<div class="form-group">
 								    	<label for="contraseña">Contraseña</label>
-								    	<input type="password" name="contraseña" class="form-control" id="contraseña" placeholder="Contraseña" value="<%= um.getContraseña() %>" required>
+								    	<input type="password" name="contraseña" class="form-control" id="contraseña" placeholder="Contraseña" value="<jsp:getProperty property="contraseña" name="usuario"/>" required>
 								  	</div>
 									<button type="submit" class="btn btn-default">Registrarse</button>
 								</form>
