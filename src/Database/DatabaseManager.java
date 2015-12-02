@@ -67,6 +67,56 @@ public class DatabaseManager {
 		}
 	}
 	
+	public UsuarioModel obtenerUsuario(String email) throws SQLException {
+		try {
+			if (establecerConexion()) {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios WHERE email = '" + email + "'");
+				if (rs.next()) {
+					UsuarioModel um = new UsuarioModel(rs.getString("nombreUsuario"), rs.getString("email"), rs.getString("contrasena"));
+					cerrarConexion();
+					return um;
+				} else {
+					cerrarConexion();
+					return null;
+				}
+			} else {
+				return null;
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Error a la hora de establecer la conexión.");
+			return null;
+		}
+	}
+	
+	public boolean loginUsuario(String email, String contraseña) throws SQLException {
+		try {
+			if(establecerConexion()) {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT contrasena FROM usuarios WHERE email = '" + email + "'");
+				if (rs.next()) {
+					if (rs.getString(1).equals(contraseña)) {
+						cerrarConexion();
+						return true;
+					} else {
+						cerrarConexion();
+						return false;
+					}
+				} else {
+					cerrarConexion();
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Error a la hora de establecer la conexión.");
+			return false;
+		}
+	}
+	
 	public boolean existeUsuarioConEmail(String email) throws SQLException {
 		try {
 			if(establecerConexion()) {

@@ -1,3 +1,5 @@
+<%@page import="Database.DatabaseManager"%>
+<%@page import="Models.UsuarioModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <jsp:useBean id="usuario" class="Models.UsuarioModel" scope="request"></jsp:useBean>
@@ -10,21 +12,6 @@
 		<link type="text/css" rel="stylesheet" href="./css/cityweatherwebapp.css" />
 		<link type="text/css" rel="stylesheet" href="./css/bootstrap.min.css" />
 		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#contraseñaBoton").click(function() {
-					$("#contraseñaTexto").slideToggle("slow",function () {
-				    });
-					
-					if ($("#contraseñaBoton").val() == 'Mostrar contraseña') {
-						$("#contraseñaBoton").prop('value', 'Ocultar contraseña');
-					} else {
-						$("#contraseñaBoton").prop('value', 'Mostrar contraseña');
-					}
-			    });
-			});
-		</script>
 	</head>
 	<body>
 		<div>
@@ -51,15 +38,28 @@
 				<div class="col-xs-4"></div>
 				<div class="col-xs-4">
 					<div class="well_transparente">
-						<div class="alert alert-success" role="alert">
-							<h1>¡Enhorabuena <jsp:getProperty property="nombreUsuario" name="usuario"/>!</h1>
-							<h3>Te has registrado correctamente con los siguientes datos:</h3>
-							<ul class="list-group">
-								<li class="list-group-item list-group-item-warning"><strong>Nombre de usuario</strong>: <jsp:getProperty property="nombreUsuario" name="usuario"/></li>
-								<li class="list-group-item list-group-item-info"><strong>Email</strong>: <jsp:getProperty property="email" name="usuario"/></li>
-								<li class="list-group-item list-group-item-danger"><strong>Contraseña</strong>: <input type="button" value="Mostrar contraseña" class="btn btn-default" id="contraseñaBoton" /> </li>
-								<li class="list-group-item" id="contraseñaTexto" style="display: none;">La contraseña elegida en el registro ha sido: <strong><jsp:getProperty property="contraseña" name="usuario"/></strong></li>
-							</ul>
+						<div class="alert alert-danger" role="alert">
+							<h1 align="center">¡Error!</h1>
+							<form action="entrar" method="get">
+								<%
+								UsuarioModel um = (UsuarioModel) request.getAttribute("usuario");
+								
+								if (!um.getNombreUsuario().equals("")) {
+									%>
+									<h3 align="justify">La contraseña introducida para el usuario con email '<jsp:getProperty property="email" name="usuario"/>' es incorrecta.</h3>
+									<input type="hidden" name="email" value="<jsp:getProperty property="email" name="usuario"/>">
+									<p>Pulsa el siguiente bot&oacute;n para volver al formulario:</p>
+							  		<button type="submit" class="btn btn-default">Formulario entrada</button>
+									<%
+								} else {
+									%>
+									<h3 align="justify">No existe nig&uacute;n usuario en el sistema asociado el email '<jsp:getProperty property="email" name="usuario"/>'.</h3>
+									<p>Pulsa el siguiente bot&oacute;n para volver al formulario:</p>
+							  		<button type="submit" class="btn btn-default">Formulario entrada</button>
+									<%
+								}
+								%>
+							</form>
 						</div>
 					</div>
 				</div>

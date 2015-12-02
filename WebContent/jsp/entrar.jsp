@@ -10,21 +10,6 @@
 		<link type="text/css" rel="stylesheet" href="./css/cityweatherwebapp.css" />
 		<link type="text/css" rel="stylesheet" href="./css/bootstrap.min.css" />
 		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#contraseñaBoton").click(function() {
-					$("#contraseñaTexto").slideToggle("slow",function () {
-				    });
-					
-					if ($("#contraseñaBoton").val() == 'Mostrar contraseña') {
-						$("#contraseñaBoton").prop('value', 'Ocultar contraseña');
-					} else {
-						$("#contraseñaBoton").prop('value', 'Mostrar contraseña');
-					}
-			    });
-			});
-		</script>
 	</head>
 	<body>
 		<div>
@@ -51,15 +36,21 @@
 				<div class="col-xs-4"></div>
 				<div class="col-xs-4">
 					<div class="well_transparente">
-						<div class="alert alert-success" role="alert">
-							<h1>¡Enhorabuena <jsp:getProperty property="nombreUsuario" name="usuario"/>!</h1>
-							<h3>Te has registrado correctamente con los siguientes datos:</h3>
-							<ul class="list-group">
-								<li class="list-group-item list-group-item-warning"><strong>Nombre de usuario</strong>: <jsp:getProperty property="nombreUsuario" name="usuario"/></li>
-								<li class="list-group-item list-group-item-info"><strong>Email</strong>: <jsp:getProperty property="email" name="usuario"/></li>
-								<li class="list-group-item list-group-item-danger"><strong>Contraseña</strong>: <input type="button" value="Mostrar contraseña" class="btn btn-default" id="contraseñaBoton" /> </li>
-								<li class="list-group-item" id="contraseñaTexto" style="display: none;">La contraseña elegida en el registro ha sido: <strong><jsp:getProperty property="contraseña" name="usuario"/></strong></li>
-							</ul>
+						<div class="panel panel-default">
+							<div class="panel-body" align="left">
+								<h2>Formulario de entrada</h2>
+								<form action="entrar" method="post">
+									<div class="form-group">
+								    	<label for="email">Email</label>
+								    	<input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<jsp:getProperty property="email" name="usuario"/>" required>
+								  	</div>
+									<div class="form-group">
+								    	<label for="contraseña">Contraseña</label>
+								    	<input type="password" name="contraseña" class="form-control" id="contraseña" placeholder="Contraseña" value="<jsp:getProperty property="contraseña" name="usuario"/>" required>
+								  	</div>
+									<button type="submit" class="btn btn-default">Entrar</button>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>

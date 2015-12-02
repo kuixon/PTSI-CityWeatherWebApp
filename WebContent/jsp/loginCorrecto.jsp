@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<jsp:useBean id="usuario" class="Models.UsuarioModel" scope="request"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -33,21 +36,9 @@
 				<div class="col-xs-4"></div>
 				<div class="col-xs-4">
 					<div class="well_transparente">
-						<div class="panel panel-default">
-							<div class="panel-body" align="left">
-								<h2>Formulario de entrada</h2>
-								<form>
-									<div class="form-group">
-								    	<label for="email">Email</label>
-								    	<input type="email" class="form-control" id="email" placeholder="Email">
-								  	</div>
-									<div class="form-group">
-								    	<label for="contraseña">Contraseña</label>
-								    	<input type="password" class="form-control" id="contraseña" placeholder="Contraseña">
-								  	</div>
-									<button type="submit" class="btn btn-default">Entrar</button>
-								</form>
-							</div>
+						<div class="alert alert-success" role="alert">
+							<h1>¡Enhorabuena <jsp:getProperty property="nombreUsuario" name="usuario"/>!</h1>
+							<h3>Has realizado el login correctamente</h3>
 						</div>
 					</div>
 				</div>
