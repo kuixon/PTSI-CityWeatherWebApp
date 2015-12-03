@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@page import="Models.UsuarioModel"%>
+<jsp:useBean id="usuario" class="Models.UsuarioModel" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -17,14 +21,29 @@
 						<li class="active"><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
 						<li><a href="#">Ciudades favoritas</a></li>
 					</ul>
-					<div class="nav navbar-nav navbar-right">
-						<div class="btn-group">
-							<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Entrar</a>
+					<%
+					UsuarioModel um = (UsuarioModel) session.getAttribute("usuario");
+					
+					if (!um.getNombreUsuario().isEmpty() && !um.getEmail().isEmpty() && !um.getContraseña().isEmpty()) {
+						%>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a><jsp:getProperty property="nombreUsuario" name="usuario"/></a></li>
+							<li><a href="entrar?action=logout">Logout</a></li>
+						</ul>
+						<%
+					} else {
+						%>
+						<div class="nav navbar-nav navbar-right">
+							<div class="btn-group">
+								<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Entrar</a>
+							</div>
+							<div class="btn-group">
+								<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Registrarse</a>
+							</div>
 						</div>
-						<div class="btn-group">
-							<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Registrarse</a>
-						</div>
-					</div>
+						<%
+					}
+					%>
 				</div>
 			</nav>
 		</div>

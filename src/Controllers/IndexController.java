@@ -7,13 +7,29 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import Models.UsuarioModel;
 
 @WebServlet(description = "El controlador index.", urlPatterns = { "/index" })
 public class IndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("html/index.html").forward(request, response);
+		
+		HttpSession sesion = request.getSession();
+		
+		UsuarioModel um = null;
+		
+		if (EntrarController.checkCookie(request) == null) {
+			um = new UsuarioModel("", "", "");
+			sesion.setAttribute("usuario", um);
+			request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
+		} else {
+			um = EntrarController.checkCookie(request);
+			sesion.setAttribute("usuario", um);
+			request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
+		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

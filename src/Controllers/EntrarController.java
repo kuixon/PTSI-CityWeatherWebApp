@@ -18,13 +18,6 @@ import Models.UsuarioModel;
 public class EntrarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/*
-		UsuarioModel um = new UsuarioModel(nombreUsuario, email, contraseña);
-		
-		request.setAttribute("usuario", um);
-		request.getRequestDispatcher("jsp/entrar.jsp").forward(request, response);
-	 */
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		HttpSession sesion = request.getSession();
@@ -56,15 +49,15 @@ public class EntrarController extends HttpServlet {
 			um = checkCookie(request);
 			if (um == null) {
 				um = new UsuarioModel(nombreUsuario, email, contraseña);
-				request.setAttribute("usuario", um);
+				sesion.setAttribute("usuario", um);
 				request.getRequestDispatcher("jsp/entrar.jsp").forward(request, response);
 			} else {
 				try {
 					if (DatabaseManager.getInstance().loginUsuario(um.getEmail(), um.getContraseña())) {
-						sesion.setAttribute("nombreUsuario", um.getNombreUsuario());
-						request.getRequestDispatcher("jsp/loginCorrecto.jsp").forward(request, response);
+						sesion.setAttribute("usuario", um);
+						request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
 					} else {
-						request.setAttribute("usuario", um);
+						sesion.setAttribute("usuario", um);
 						request.getRequestDispatcher("jsp/loginErrores.jsp").forward(request, response);
 					}
 				} catch (SQLException e) {
@@ -73,7 +66,7 @@ public class EntrarController extends HttpServlet {
 			}
 		} else {
 			if (action.equalsIgnoreCase("logout")) {
-				sesion.removeAttribute("nombreUsuario");
+				sesion.removeAttribute("usuario");
 				Cookie[] cookies = request.getCookies();
 				for (Cookie ck : cookies) {
 					if (ck.getName().equalsIgnoreCase("username")) {
@@ -86,13 +79,13 @@ public class EntrarController extends HttpServlet {
 					}
 				}
 				um = new UsuarioModel(nombreUsuario, email, contraseña);
-				request.setAttribute("usuario", um);
+				sesion.setAttribute("usuario", um);
 				request.getRequestDispatcher("jsp/entrar.jsp").forward(request, response);
 			}
 		}
 	}
 	
-	private UsuarioModel checkCookie(HttpServletRequest request) {
+	public static UsuarioModel checkCookie(HttpServletRequest request) {
 		Cookie[] cookies = request.getCookies();
 		UsuarioModel um = null;
 		if(cookies == null) {
@@ -130,22 +123,22 @@ public class EntrarController extends HttpServlet {
 					UsuarioModel um = DatabaseManager.getInstance().obtenerUsuario(email);
 					
 					if (DatabaseManager.getInstance().loginUsuario(email, contraseña)) {
-						sesion.setAttribute("nombreUsuario", um.getNombreUsuario());
+						sesion.setAttribute("usuario", um);
 						Cookie ckEmail = new Cookie("username", um.getEmail());
 						ckEmail.setMaxAge(3600);
 						response.addCookie(ckEmail);
 						Cookie ckContraseña = new Cookie("password", um.getContraseña());
 						ckContraseña.setMaxAge(3600);
 						response.addCookie(ckContraseña);
-						request.getRequestDispatcher("jsp/loginCorrecto.jsp").forward(request, response);
+						request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
 					} else {
-						request.setAttribute("usuario", um);
+						sesion.setAttribute("usuario", um);
 						request.getRequestDispatcher("jsp/loginErrores.jsp").forward(request, response);
 					}
 				} else {
 					UsuarioModel um = new UsuarioModel("",email,"");
 					
-					request.setAttribute("usuario", um);
+					sesion.setAttribute("usuario", um);
 					request.getRequestDispatcher("jsp/loginErrores.jsp").forward(request, response);
 				}
 			} catch (SQLException e) {

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Database.DatabaseManager;
 import Models.UsuarioModel;
@@ -17,6 +18,8 @@ public class RegistroController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession sesion = request.getSession();
 		
 		String nombreUsuario;
 		if(request.getParameter("nombreUsuario") != null) {
@@ -39,13 +42,23 @@ public class RegistroController extends HttpServlet {
 			contraseña = "";
 		}
 		
-		UsuarioModel um = new UsuarioModel(nombreUsuario, email, contraseña);
+		UsuarioModel um = null;
 		
-		request.setAttribute("usuario", um);
-		request.getRequestDispatcher("jsp/registro.jsp").forward(request, response);
+		if (EntrarController.checkCookie(request) == null) {
+			um = new UsuarioModel(nombreUsuario, email, contraseña);
+			sesion.setAttribute("usuario", um);
+			request.getRequestDispatcher("jsp/registro.jsp").forward(request, response);
+		} else {
+			um = EntrarController.checkCookie(request);
+			sesion.setAttribute("usuario", um);
+			request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
+		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession sesion = request.getSession();
+		
 		String nombreUsuario = request.getParameter("nombreUsuario");
 		String email = request.getParameter("email");
 		String contraseña = request.getParameter("contraseña");
@@ -54,11 +67,11 @@ public class RegistroController extends HttpServlet {
 		
 		try {
 			if (DatabaseManager.getInstance().existeUsuarioConEmail(email)) {
-				request.setAttribute("usuario", um);
+				sesion.setAttribute("usuario", um);
 				request.getRequestDispatcher("jsp/registroErrores.jsp").forward(request, response);
 			} else {
 				DatabaseManager.getInstance().insertarUsuario(um);
-				request.setAttribute("usuario", um);
+				sesion.setAttribute("usuario", um);
 				request.getRequestDispatcher("jsp/registroCorrecto.jsp").forward(request, response);
 			}
 		} catch (SQLException e1) {

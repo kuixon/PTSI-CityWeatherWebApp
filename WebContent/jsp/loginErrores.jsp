@@ -2,7 +2,7 @@
 <%@page import="Models.UsuarioModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<jsp:useBean id="usuario" class="Models.UsuarioModel" scope="request"></jsp:useBean>
+<jsp:useBean id="usuario" class="Models.UsuarioModel" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -42,7 +42,7 @@
 							<h1 align="center">¡Error!</h1>
 							<form action="entrar" method="get">
 								<%
-								UsuarioModel um = (UsuarioModel) request.getAttribute("usuario");
+								UsuarioModel um = (UsuarioModel) session.getAttribute("usuario");
 								
 								if (!um.getNombreUsuario().equals("")) {
 									%>
