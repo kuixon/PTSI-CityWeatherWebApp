@@ -20,14 +20,17 @@
 						<li><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
 						<li><a href="#">Ciudades favoritas</a></li>
 					</ul>
-					<div class="nav navbar-nav navbar-right">
-						<div class="btn-group">
-							<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Entrar</a>
-						</div>
-						<div class="btn-group">
-							<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Registrarse</a>
-						</div>
-					</div>
+					<%
+					String nombreUsuario = (String) session.getAttribute("nombreUsuario");
+					if (nombreUsuario != null) {
+					%>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a><%= nombreUsuario %></a></li>
+						<li><a href="entrar?action=logout">Logout</a></li>
+					</ul>
+					<%	
+					}
+					%>
 				</div>
 			</nav>
 		</div>

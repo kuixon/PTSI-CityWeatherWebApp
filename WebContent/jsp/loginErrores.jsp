@@ -53,7 +53,7 @@
 									<%
 								} else {
 									%>
-									<h3 align="justify">No existe nig&uacute;n usuario en el sistema asociado el email '<jsp:getProperty property="email" name="usuario"/>'.</h3>
+									<h3 align="justify">No existe nig&uacute;n usuario en el sistema asociado al email '<jsp:getProperty property="email" name="usuario"/>'.</h3>
 									<p>Pulsa el siguiente bot&oacute;n para volver al formulario:</p>
 							  		<button type="submit" class="btn btn-default">Formulario entrada</button>
 									<%
