@@ -16,16 +16,16 @@
 		<div>
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container-fluid">
-					<ul class="nav navbar-nav navbar-left">
-						<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-						<li class="active"><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
-						<li><a href="#">Ciudades favoritas</a></li>
-					</ul>
 					<%
 					UsuarioModel um = (UsuarioModel) session.getAttribute("usuario");
 					
 					if (!um.getNombreUsuario().isEmpty() && !um.getEmail().isEmpty() && !um.getContraseña().isEmpty()) {
 						%>
+						<ul class="nav navbar-nav navbar-left">
+							<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
+							<li class="active"><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
+							<li><a href="#">Ciudades favoritas</a></li>
+						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li><a><jsp:getProperty property="nombreUsuario" name="usuario"/></a></li>
 							<li><a href="entrar?action=logout">Logout</a></li>
@@ -33,6 +33,10 @@
 						<%
 					} else {
 						%>
+						<ul class="nav navbar-nav navbar-left">
+							<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
+							<li class="active"><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
+						</ul>
 						<div class="nav navbar-nav navbar-right">
 							<div class="btn-group">
 								<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Entrar</a>
@@ -55,7 +59,17 @@
 							<div class="panel-heading">Buscador</div>
 							<div class="panel-body">
 								<h2 align="center">Busca la ciudad que desees para obtener su situaci&oacute;n meteorol&oacute;gica actual</h2>
-								<h3 align="justify">Adem&aacute;s, podr&aacute;s añadir ciudades a tu lista de favoritos en caso de que dispongas ya de una cuenta. Si no es as&iacute;, <a href="/CityWeatherWebApp/registro">¡Reg&iacute;strate!</a></h3>
+								<%
+								if (!um.getNombreUsuario().isEmpty() && !um.getEmail().isEmpty() && !um.getContraseña().isEmpty()) {
+									%>
+									<h3 align="center">Adem&aacute;s, podr&aacute;s añadir ciudades a tu lista de favoritos en caso de que dispongas ya de una cuenta.</h3>
+									<%
+								} else {
+									%>	
+									<h3 align="justify">Adem&aacute;s, podr&aacute;s añadir ciudades a tu lista de favoritos en caso de que dispongas ya de una cuenta. Si no es as&iacute;, <a href="/CityWeatherWebApp/registro">¡Reg&iacute;strate!</a></h3>
+									<%
+								}
+								%>
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Introduce el nombre de la ciudad, por ejemplo: Bilbao">
 									<span class="input-group-btn">

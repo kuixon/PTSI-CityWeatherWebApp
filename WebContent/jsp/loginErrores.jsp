@@ -20,7 +20,6 @@
 					<ul class="nav navbar-nav navbar-left">
 						<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
 						<li><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
-						<li><a href="#">Ciudades favoritas</a></li>
 					</ul>
 					<div class="nav navbar-nav navbar-right">
 						<div class="btn-group">
