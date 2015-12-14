@@ -70,12 +70,25 @@
 									<%
 								}
 								%>
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Introduce el nombre de la ciudad, por ejemplo: Bilbao">
-									<span class="input-group-btn">
-								    	<button class="btn btn-default" type="button">Buscar</button>
-									</span>
-								</div>
+								<form action="buscar" method="post">
+									<div class="input-group">
+										<input type="text" name="nombreCiudad" class="form-control" placeholder="Introduce el nombre de la ciudad, por ejemplo: Bilbao">
+										<%
+										if (!um.getNombreUsuario().isEmpty() && !um.getEmail().isEmpty() && !um.getContraseña().isEmpty()) {
+											%>
+											<input type="hidden" name="emailUsuarioLogin" value="<jsp:getProperty property="email" name="usuario"/>">
+											<%
+										} else {
+											%>
+											<input type="hidden" name="emailUsuarioLogin" value="">
+											<%
+										}
+										%>
+										<span class="input-group-btn">
+									    	<button type="submit" class="btn btn-default">Buscar</button>
+										</span>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
