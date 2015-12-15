@@ -26,7 +26,7 @@
 						<ul class="nav navbar-nav navbar-left">
 							<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
 							<li><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
-							<li><a href="#">Ciudades favoritas</a></li>
+							<li><a href="/CityWeatherWebApp/favoritos?email=<jsp:getProperty property="email" name="usuario"/>">Ciudades favoritas</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li><a><jsp:getProperty property="nombreUsuario" name="usuario"/></a></li>
@@ -57,7 +57,7 @@
 			<div class="row">
 				<div class="col-xs-4">
 					<div class="well_transparente">
-						<h1>Sobre <jsp:getProperty property="nombreCiudad" name="ciudad"/></h1>
+						<h1>Sobre <jsp:getProperty property="nombre" name="ciudad"/></h1>
 						<div class="table-responsive">
 							<table class="table table-bordered">
 								<thead>
@@ -69,15 +69,15 @@
 								<tbody>
 									<tr class="info">
 										<td>Informaci&oacute;n de la ciudad</td>
-										<td><a href="https://es.wikipedia.org/wiki/<jsp:getProperty property="nombreCiudad" name="ciudad"/>" target="_blank">Link</a></td>
+										<td><a href="https://es.wikipedia.org/wiki/<jsp:getProperty property="nombre" name="ciudad"/>" target="_blank">Link</a></td>
 									</tr>
 									<tr class="success">
 										<td>Noticias de la ciudad</td>
-										<td><a href="http://edition.cnn.com/search/?text=<jsp:getProperty property="nombreCiudad" name="ciudad"/>" target="_blank">Link</a></td>
+										<td><a href="http://edition.cnn.com/search/?text=<jsp:getProperty property="nombre" name="ciudad"/>" target="_blank">Link</a></td>
 									</tr>
 									<tr class="warning">
 										<td>Busqueda general</td>
-										<td><a href="https://www.google.es/#q=<jsp:getProperty property="nombreCiudad" name="ciudad"/>" target="_blank">Link</a></td>
+										<td><a href="https://www.google.es/#q=<jsp:getProperty property="nombre" name="ciudad"/>" target="_blank">Link</a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -90,15 +90,27 @@
 						<ul class="list-group">
 							<li class="list-group-item list-group-item-success">
 								<h4 class="list-group-item-heading">Tiempo</h4>
-								<p class="list-group-item-text"><jsp:getProperty property="situacionMetActual" name="ciudad"/></p>
+								<p class="list-group-item-text"><jsp:getProperty property="tiempo" name="ciudad"/></p>
 							</li>
 							<li class="list-group-item list-group-item-info">
-								<h4 class="list-group-item-heading">Otro dato</h4>
-								<p class="list-group-item-text">Valor de prueba.</p>
+								<h4 class="list-group-item-heading">Temperatura actual</h4>
+								<p class="list-group-item-text"><jsp:getProperty property="temperatura" name="ciudad"/>Cº</p>
+							</li>
+							<li class="list-group-item list-group-item-info">
+								<h4 class="list-group-item-heading">Temperatura m&aacute;xima</h4>
+								<p class="list-group-item-text"><jsp:getProperty property="temperaturaMaxima" name="ciudad"/>Cº</p>
+							</li>
+							<li class="list-group-item list-group-item-info">
+								<h4 class="list-group-item-heading">Temperatura m&iacute;nima</h4>
+								<p class="list-group-item-text"><jsp:getProperty property="temperaturaMinima" name="ciudad"/>Cº</p>
+							</li>
+							<li class="list-group-item list-group-item-danger">
+								<h4 class="list-group-item-heading">Velocidad del viento</h4>
+								<p class="list-group-item-text"><jsp:getProperty property="velocidadViento" name="ciudad"/>%</p>
 							</li>
 							<li class="list-group-item list-group-item-warning">
-								<h4 class="list-group-item-heading">Otro dato</h4>
-								<p class="list-group-item-text">Valor de prueba.</p>
+								<h4 class="list-group-item-heading">Humedad</h4>
+								<p class="list-group-item-text"><jsp:getProperty property="humedad" name="ciudad"/>%</p>
 							</li>
 						</ul>
 					</div>
@@ -113,18 +125,18 @@
 							
 							if (cm.isFavoritos()) {
 								%>
-								<h3>Pulsa el siguiente bot&oacute;n para quitar la ciudad '<jsp:getProperty property="nombreCiudad" name="ciudad"/>' de tu lista de favoritos.</h3>
+								<h3>Pulsa el siguiente bot&oacute;n para quitar la ciudad '<jsp:getProperty property="nombre" name="ciudad"/>' de tu lista de favoritos.</h3>
 								<a href="#" class="btn btn-default">Quitar ciudad</a>
 								<%
 							} else {
 								%>
-								<h3>Pulsa el siguiente bot&oacute;n para añadir la ciudad '<jsp:getProperty property="nombreCiudad" name="ciudad"/>' a tu lista de favoritos.</h3>
+								<h3>Pulsa el siguiente bot&oacute;n para añadir la ciudad '<jsp:getProperty property="nombre" name="ciudad"/>' a tu lista de favoritos.</h3>
 								<a href="#" class="btn btn-default">Añadir ciudad</a>							
 								<%
 							}	
 						} else {
 							%>
-							<h3>Inicia sesi&oacute;n para poder ver el apartado de favoritos.</h3>
+							<h3>Entra en el sistema para poder ver el apartado de favoritos.</h3>
 							<%
 						}
 						%>

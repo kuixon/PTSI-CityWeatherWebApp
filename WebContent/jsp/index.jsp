@@ -24,7 +24,7 @@
 						<ul class="nav navbar-nav navbar-left">
 							<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
 							<li class="active"><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
-							<li><a href="#">Ciudades favoritas</a></li>
+							<li><a href="/CityWeatherWebApp/favoritos?email=<jsp:getProperty property="email" name="usuario"/>">Ciudades favoritas</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li><a><jsp:getProperty property="nombreUsuario" name="usuario"/></a></li>

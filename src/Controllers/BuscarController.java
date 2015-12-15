@@ -40,9 +40,13 @@ public class BuscarController extends HttpServlet {
 		
 		
 		CiudadModel cm = new CiudadModel();
-		cm.setNombreCiudad(nombreCiudad);
-		cm.setSituacionMetActual("Soleado");
-		cm.setFavoritos(true);
+		cm.setNombre(nombreCiudad);
+		cm.setTiempo("Soleado");
+		cm.setTemperatura(22.5);
+		cm.setTemperaturaMaxima(28.6);
+		cm.setTemperaturaMinima(18);
+		cm.setVelocidadViento(20.1);
+		cm.setHumedad(89);
 		
 		sesion.setAttribute("usuario", um);
 		sesion.setAttribute("ciudad", cm);

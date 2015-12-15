@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import Models.CiudadModel;
 import Models.UsuarioModel;
 
 public class DatabaseManager {
@@ -67,6 +68,86 @@ public class DatabaseManager {
 		}
 	}
 	
+	public void insertarCiudad(CiudadModel cm) throws SQLException {
+		try {
+			if (establecerConexion()) {
+				Statement stmt = con.createStatement();
+				stmt.executeUpdate("INSERT INTO ciudades(nombreCiudad,tiempo,temperatura,"
+						+ "temperaturaMaxima,temperaturaMinima,velocidadViento,humedad) "
+						+ "VALUES('" + cm.getNombre() + "','" + cm.getTiempo() + "',"
+						+ Double.toString(cm.getTemperatura()) + "," + Double.toString(cm.getTemperaturaMaxima()) +
+						"," + Double.toString(cm.getTemperaturaMinima()) + "," + Double.toString(cm.getVelocidadViento())
+						+ "," + Double.toString(cm.getHumedad()) + ")");
+				System.out.println("Ciudad insertada correctamente en la base de datos.");
+				cerrarConexion();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("ERROR al insertar una ciudad en la base de datos.");
+		}
+	}
+	
+	public void insertarRelacion(int idusuario, int idciudad) throws SQLException {
+		try {
+			if (establecerConexion()) {
+				Statement stmt = con.createStatement();
+				stmt.executeUpdate("INSERT INTO usuariosciudades(idUsuarios,idCiudades) "
+						+ "VALUES(" + Integer.toString(idusuario) + "," + Integer.toString(idciudad) + ")");
+				System.out.println("Relación insertada correctamente en la base de datos.");
+				cerrarConexion();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("ERROR al insertar la relación en la base de datos.");
+		}
+	}
+	
+	public int obtenerIdUsuarioPorEmail(String email) throws SQLException {
+		try {
+			if (establecerConexion()) {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT idUsuarios FROM usuarios WHERE email = '" + email + "'");
+				if (rs.next()) {
+					int id = rs.getInt("idUsuarios");
+					cerrarConexion();
+					return id;
+				} else {
+					cerrarConexion();
+					return 0;
+				}
+			} else {
+				return 0;
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Error a la hora de establecer la conexión.");
+			return 0;
+		}
+	}
+	
+	public int obtenerIdCiudadPorNombre(String nombre) throws SQLException {
+		try {
+			if (establecerConexion()) {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT idCiudades FROM ciudades WHERE nombreCiudad = '" + nombre + "'");
+				if (rs.next()) {
+					int id = rs.getInt("idCiudades");
+					cerrarConexion();
+					return id;
+				} else {
+					cerrarConexion();
+					return 0;
+				}
+			} else {
+				return 0;
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Error a la hora de establecer la conexión.");
+			return 0;
+		}
+	}
+	
 	public UsuarioModel obtenerUsuario(String email) throws SQLException {
 		try {
 			if (establecerConexion()) {
@@ -76,6 +157,31 @@ public class DatabaseManager {
 					UsuarioModel um = new UsuarioModel(rs.getString("nombreUsuario"), rs.getString("email"), rs.getString("contrasena"));
 					cerrarConexion();
 					return um;
+				} else {
+					cerrarConexion();
+					return null;
+				}
+			} else {
+				return null;
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Error a la hora de establecer la conexión.");
+			return null;
+		}
+	}
+	
+	public CiudadModel obtenerCiudad(String nombreCiudad) throws SQLException {
+		try {
+			if (establecerConexion()) {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM ciudades WHERE nombreCiudad = '" + nombreCiudad + "'");
+				if (rs.next()) {
+					CiudadModel cm = new CiudadModel(rs.getString("nombreCiudad"), rs.getString("tiempo"), rs.getDouble("temperatura"), 
+							rs.getDouble("temperaturaMaxima"), rs.getDouble("temperaturaMinima"), rs.getDouble("velocidadViento"), 
+							rs.getDouble("humedad"), false);
+					cerrarConexion();
+					return cm;
 				} else {
 					cerrarConexion();
 					return null;
