@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="Models.UsuarioModel"%>
@@ -49,7 +50,25 @@
 									</tr>
 								</thead>
 								<tbody>
-									
+									<%
+									ArrayList<CiudadModel> alcm = (ArrayList<CiudadModel>) session.getAttribute("ciudades");
+									if (alcm.size() > 0) {
+										for (CiudadModel cm : alcm) {
+											%>
+											<tr>
+												<td><%= cm.getNombre() %></td>
+												<td><%= cm.getTiempo() %></td>
+												<td><%= Double.toString(cm.getTemperatura()) %></td>
+												<td><%= Double.toString(cm.getTemperaturaMaxima()) %></td>
+												<td><%= Double.toString(cm.getTemperaturaMinima()) %></td>
+												<td><%= Double.toString(cm.getVelocidadViento()) %></td>
+												<td><%= Double.toString(cm.getHumedad()) %></td>
+												<td><a href="#">Quitar</a></td>
+											</tr>
+											<%
+										}
+									}
+									%>
 								</tbody>
 							</table>
 						</div>

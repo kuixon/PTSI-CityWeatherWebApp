@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import Models.CiudadModel;
 import Models.UsuarioModel;
@@ -186,6 +187,34 @@ public class DatabaseManager {
 					cerrarConexion();
 					return null;
 				}
+			} else {
+				return null;
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Error a la hora de establecer la conexión.");
+			return null;
+		}
+	}
+	
+	public ArrayList<CiudadModel> obtenerCiudadesUsuario(int idusuario) throws SQLException {
+		ArrayList<CiudadModel> alcm = new ArrayList<CiudadModel>();
+		try {
+			if (establecerConexion()) {
+				Statement stmt = con.createStatement();
+				
+				ResultSet rs = stmt.executeQuery("SELECT * FROM ciudades c INNER JOIN usuariosciudades uc ON"
+						+ " c.idCiudades = uc.idCiudades WHERE uc.idUsuarios = " + Integer.toString(idusuario));
+				
+				while (rs.next()) {
+					CiudadModel cm = new CiudadModel(rs.getString("nombreCiudad"), rs.getString("tiempo"), rs.getDouble("temperatura"), 
+							rs.getDouble("temperaturaMaxima"), rs.getDouble("temperaturaMinima"), rs.getDouble("velocidadViento"), 
+							rs.getDouble("humedad"), false);
+					alcm.add(cm);
+				}
+				
+				cerrarConexion();
+				return alcm;
 			} else {
 				return null;
 			}
