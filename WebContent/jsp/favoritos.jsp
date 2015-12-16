@@ -39,14 +39,14 @@
 							<table class="table table-bordered">
 								<thead>
 									<tr>
-										<td><strong>Ciudad</strong></td>
-										<td><strong>Tiempo</strong></td>
-										<td><strong>Temperatura actual</strong></td>
-										<td><strong>Temperatura m&aacute;xima</strong></td>
-										<td><strong>Temperatura m&iacute;nima</strong></td>
-										<td><strong>Velocidad del viento</strong></td>
-										<td><strong>Humedad</strong></td>
-										<td><strong>Quitar de favoritos</strong></td>
+										<td align="center"><strong>Ciudad</strong></td>
+										<td align="center"><strong>Tiempo</strong></td>
+										<td align="center"><strong>Temperatura actual</strong></td>
+										<td align="center"><strong>Temperatura m&aacute;xima</strong></td>
+										<td align="center"><strong>Temperatura m&iacute;nima</strong></td>
+										<td align="center"><strong>Velocidad del viento</strong></td>
+										<td align="center"><strong>Humedad</strong></td>
+										<td align="center"><strong>Quitar de favoritos</strong></td>
 									</tr>
 								</thead>
 								<tbody>
@@ -56,14 +56,20 @@
 										for (CiudadModel cm : alcm) {
 											%>
 											<tr>
-												<td><%= cm.getNombre() %></td>
-												<td><%= cm.getTiempo() %></td>
-												<td><%= Double.toString(cm.getTemperatura()) %></td>
-												<td><%= Double.toString(cm.getTemperaturaMaxima()) %></td>
-												<td><%= Double.toString(cm.getTemperaturaMinima()) %></td>
-												<td><%= Double.toString(cm.getVelocidadViento()) %></td>
-												<td><%= Double.toString(cm.getHumedad()) %></td>
-												<td><a href="#">Quitar</a></td>
+												<td align="center"><%= cm.getNombre() %></td>
+												<td align="center"><%= cm.getTiempo() %></td>
+												<td align="center"><%= Double.toString(cm.getTemperatura()) %> Cº</td>
+												<td align="center"><%= Double.toString(cm.getTemperaturaMaxima()) %> Cº</td>
+												<td align="center"><%= Double.toString(cm.getTemperaturaMinima()) %> Cº</td>
+												<td align="center"><%= Double.toString(cm.getVelocidadViento()) %> Km/h</td>
+												<td align="center"><%= Double.toString(cm.getHumedad()) %> %</td>
+												<td align="center">
+													<form action="quitarfavoritos" method="post">
+														<input type="hidden" name="nombreCiudad" value="<%= cm.getNombre() %>">
+														<input type="hidden" name="emailUsuario" value="<jsp:getProperty property="email" name="usuario"/>">
+														<button type="submit"><img alt="icono quitar favoritos" height="23" width="23" src="./img/cruz-roja-marca.png"></button>
+													</form>
+												</td>
 											</tr>
 											<%
 										}

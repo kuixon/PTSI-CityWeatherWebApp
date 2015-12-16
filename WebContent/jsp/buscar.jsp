@@ -94,23 +94,23 @@
 							</li>
 							<li class="list-group-item list-group-item-info">
 								<h4 class="list-group-item-heading">Temperatura actual</h4>
-								<p class="list-group-item-text"><jsp:getProperty property="temperatura" name="ciudad"/>Cº</p>
+								<p class="list-group-item-text"><jsp:getProperty property="temperatura" name="ciudad"/> Cº</p>
 							</li>
 							<li class="list-group-item list-group-item-info">
 								<h4 class="list-group-item-heading">Temperatura m&aacute;xima</h4>
-								<p class="list-group-item-text"><jsp:getProperty property="temperaturaMaxima" name="ciudad"/>Cº</p>
+								<p class="list-group-item-text"><jsp:getProperty property="temperaturaMaxima" name="ciudad"/> Cº</p>
 							</li>
 							<li class="list-group-item list-group-item-info">
 								<h4 class="list-group-item-heading">Temperatura m&iacute;nima</h4>
-								<p class="list-group-item-text"><jsp:getProperty property="temperaturaMinima" name="ciudad"/>Cº</p>
+								<p class="list-group-item-text"><jsp:getProperty property="temperaturaMinima" name="ciudad"/> Cº</p>
 							</li>
 							<li class="list-group-item list-group-item-danger">
 								<h4 class="list-group-item-heading">Velocidad del viento</h4>
-								<p class="list-group-item-text"><jsp:getProperty property="velocidadViento" name="ciudad"/>%</p>
+								<p class="list-group-item-text"><jsp:getProperty property="velocidadViento" name="ciudad"/> Km/h</p>
 							</li>
 							<li class="list-group-item list-group-item-warning">
 								<h4 class="list-group-item-heading">Humedad</h4>
-								<p class="list-group-item-text"><jsp:getProperty property="humedad" name="ciudad"/>%</p>
+								<p class="list-group-item-text"><jsp:getProperty property="humedad" name="ciudad"/> %</p>
 							</li>
 						</ul>
 					</div>
@@ -119,19 +119,32 @@
 					<div class="well_transparente">
 						<h1>Favoritos</h1>
 						<%
-						
 						if (!um.getNombreUsuario().isEmpty() && !um.getEmail().isEmpty() && !um.getContraseña().isEmpty()) {
 							CiudadModel cm = (CiudadModel) session.getAttribute("ciudad");
 							
 							if (cm.isFavoritos()) {
 								%>
 								<h3>Pulsa el siguiente bot&oacute;n para quitar la ciudad '<jsp:getProperty property="nombre" name="ciudad"/>' de tu lista de favoritos.</h3>
-								<a href="#" class="btn btn-default">Quitar ciudad</a>
+								<form action="quitarfavoritos" method="post">
+									<input type="hidden" name="nombreCiudad" value="<jsp:getProperty property="nombre" name="ciudad"/>">
+									<input type="hidden" name="emailUsuario" value="<jsp:getProperty property="email" name="usuario"/>">
+									<button type="submit" class="btn btn-default">Quitar ciudad</button>
+								</form>
 								<%
 							} else {
 								%>
 								<h3>Pulsa el siguiente bot&oacute;n para añadir la ciudad '<jsp:getProperty property="nombre" name="ciudad"/>' a tu lista de favoritos.</h3>
-								<a href="#" class="btn btn-default">Añadir ciudad</a>							
+								<form action="añadirfavoritos" method="post">
+									<input type="hidden" name="email" value="<jsp:getProperty property="email" name="usuario"/>">
+									<input type="hidden" name="nombre" value="<jsp:getProperty property="nombre" name="ciudad"/>">
+									<input type="hidden" name="tiempo" value="<jsp:getProperty property="tiempo" name="ciudad"/>">
+									<input type="hidden" name="temperatura" value="<jsp:getProperty property="temperatura" name="ciudad"/>">
+									<input type="hidden" name="temperaturaMaxima" value="<jsp:getProperty property="temperaturaMaxima" name="ciudad"/>">
+									<input type="hidden" name="temperaturaMinima" value="<jsp:getProperty property="temperaturaMinima" name="ciudad"/>">
+									<input type="hidden" name="velocidadViento" value="<jsp:getProperty property="velocidadViento" name="ciudad"/>">
+									<input type="hidden" name="humedad" value="<jsp:getProperty property="humedad" name="ciudad"/>">
+									<button type="submit" class="btn btn-default">Añadir ciudad</button>
+								</form>							
 								<%
 							}	
 						} else {

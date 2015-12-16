@@ -38,15 +38,31 @@ public class BuscarController extends HttpServlet {
 			um.setContraseña("");
 		}
 		
-		
+		//INICIO - APARTADO DONDE OBTENDRÍAMOS LOS DATOS DE LA API
 		CiudadModel cm = new CiudadModel();
 		cm.setNombre(nombreCiudad);
-		cm.setTiempo("Soleado");
-		cm.setTemperatura(22.5);
-		cm.setTemperaturaMaxima(28.6);
-		cm.setTemperaturaMinima(18);
-		cm.setVelocidadViento(20.1);
-		cm.setHumedad(89);
+		cm.setTiempo("Lluvia");
+		cm.setTemperatura(9.8);
+		cm.setTemperaturaMaxima(14.5);
+		cm.setTemperaturaMinima(2.5);
+		cm.setVelocidadViento(40.3);
+		cm.setHumedad(98);
+		//FIN - APARTADO DONDE OBTENDRÍAMOS LOS DATOS DE LA APIS
+		
+		try {
+			if (DatabaseManager.getInstance().obtenerCiudad(nombreCiudad) != null) {
+				int idciudad = DatabaseManager.getInstance().obtenerIdCiudadPorNombre(nombreCiudad);
+				int idusuario = DatabaseManager.getInstance().obtenerIdUsuarioPorEmail(emailUsuarioLogin);
+				
+				if (DatabaseManager.getInstance().existeRelacion(idusuario, idciudad)) {
+					cm.setFavoritos(true);
+				} else {
+					cm.setFavoritos(false);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		sesion.setAttribute("usuario", um);
 		sesion.setAttribute("ciudad", cm);

@@ -119,8 +119,8 @@ public class EntrarController extends HttpServlet {
 			String contraseña = request.getParameter("contraseña").trim();
 			
 			try {
-				if (DatabaseManager.getInstance().existeUsuarioConEmail(email)) {
-					UsuarioModel um = DatabaseManager.getInstance().obtenerUsuario(email);
+				UsuarioModel um = DatabaseManager.getInstance().obtenerUsuario(email);
+				if (um != null) {
 					
 					if (DatabaseManager.getInstance().loginUsuario(email, contraseña)) {
 						sesion.setAttribute("usuario", um);
@@ -136,9 +136,9 @@ public class EntrarController extends HttpServlet {
 						request.getRequestDispatcher("jsp/loginErrores.jsp").forward(request, response);
 					}
 				} else {
-					UsuarioModel um = new UsuarioModel("",email,"");
+					UsuarioModel um2 = new UsuarioModel("",email,"");
 					
-					sesion.setAttribute("usuario", um);
+					sesion.setAttribute("usuario", um2);
 					request.getRequestDispatcher("jsp/loginErrores.jsp").forward(request, response);
 				}
 			} catch (SQLException e) {

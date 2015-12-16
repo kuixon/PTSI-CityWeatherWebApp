@@ -66,7 +66,7 @@ public class RegistroController extends HttpServlet {
 		UsuarioModel um = new UsuarioModel(nombreUsuario, email, contraseña);
 		
 		try {
-			if (DatabaseManager.getInstance().existeUsuarioConEmail(email)) {
+			if (DatabaseManager.getInstance().obtenerUsuario(email) != null) {
 				sesion.setAttribute("usuario", um);
 				request.getRequestDispatcher("jsp/registroErrores.jsp").forward(request, response);
 			} else {
