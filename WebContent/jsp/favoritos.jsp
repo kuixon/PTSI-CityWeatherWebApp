@@ -36,7 +36,7 @@
 					<div class="col-xs-12">
 						<h1>Estas son tus ciudades favoritas <jsp:getProperty property="nombreUsuario" name="usuario"/></h1>
 						<div class="pull-right">
-							<button class="btn btn-default"><img alt="icono reload" height="40" width="40" src="./img/reload.png"></button>
+							<button class="boton_reload"></button>
 						</div>
 						<div class="pull-right">
 							<h3>Actualizar los datos: &nbsp;</h3>
@@ -76,7 +76,7 @@
 														<form action="quitarfavoritos" method="post">
 															<input type="hidden" name="nombreCiudad" value="<%= cm.getNombre() %>">
 															<input type="hidden" name="emailUsuario" value="<jsp:getProperty property="email" name="usuario"/>">
-															<button type="submit"><img alt="icono quitar favoritos" height="23" width="23" src="./img/cruz-roja-marca.png"></button>
+															<button class="boton_quitar" type="submit"></button>
 														</form>
 													</td>
 												</tr>
