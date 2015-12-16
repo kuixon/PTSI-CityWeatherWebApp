@@ -32,51 +32,61 @@
 		</div>
 		<div class="contenedor_contenido">
 			<div class="row">
-				<div class="col-xs-12">
-					<div class="well_transparente">
+				<div class="well_transparente">
+					<div class="col-xs-12">
 						<h1>Estas son tus ciudades favoritas <jsp:getProperty property="nombreUsuario" name="usuario"/></h1>
-						<div class="table-responsive">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<td align="center"><strong>Ciudad</strong></td>
-										<td align="center"><strong>Tiempo</strong></td>
-										<td align="center"><strong>Temperatura actual</strong></td>
-										<td align="center"><strong>Temperatura m&aacute;xima</strong></td>
-										<td align="center"><strong>Temperatura m&iacute;nima</strong></td>
-										<td align="center"><strong>Velocidad del viento</strong></td>
-										<td align="center"><strong>Humedad</strong></td>
-										<td align="center"><strong>Quitar de favoritos</strong></td>
-									</tr>
-								</thead>
-								<tbody>
-									<%
-									ArrayList<CiudadModel> alcm = (ArrayList<CiudadModel>) session.getAttribute("ciudades");
-									if (alcm.size() > 0) {
-										for (CiudadModel cm : alcm) {
-											%>
-											<tr>
-												<td align="center"><%= cm.getNombre() %></td>
-												<td align="center"><%= cm.getTiempo() %></td>
-												<td align="center"><%= Double.toString(cm.getTemperatura()) %> Cº</td>
-												<td align="center"><%= Double.toString(cm.getTemperaturaMaxima()) %> Cº</td>
-												<td align="center"><%= Double.toString(cm.getTemperaturaMinima()) %> Cº</td>
-												<td align="center"><%= Double.toString(cm.getVelocidadViento()) %> Km/h</td>
-												<td align="center"><%= Double.toString(cm.getHumedad()) %> %</td>
-												<td align="center">
-													<form action="quitarfavoritos" method="post">
-														<input type="hidden" name="nombreCiudad" value="<%= cm.getNombre() %>">
-														<input type="hidden" name="emailUsuario" value="<jsp:getProperty property="email" name="usuario"/>">
-														<button type="submit"><img alt="icono quitar favoritos" height="23" width="23" src="./img/cruz-roja-marca.png"></button>
-													</form>
-												</td>
-											</tr>
-											<%
+						<div class="pull-right">
+							<button class="btn btn-default"><img alt="icono reload" height="40" width="40" src="./img/reload.png"></button>
+						</div>
+						<div class="pull-right">
+							<h3>Actualizar los datos: &nbsp;</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="table-responsive">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<td align="center"><strong>Ciudad</strong></td>
+											<td align="center"><strong>Tiempo</strong></td>
+											<td align="center"><strong>Temperatura actual</strong></td>
+											<td align="center"><strong>Temperatura m&aacute;xima</strong></td>
+											<td align="center"><strong>Temperatura m&iacute;nima</strong></td>
+											<td align="center"><strong>Velocidad del viento</strong></td>
+											<td align="center"><strong>Humedad</strong></td>
+											<td align="center"><strong>Quitar de favoritos</strong></td>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+										ArrayList<CiudadModel> alcm = (ArrayList<CiudadModel>) session.getAttribute("ciudades");
+										if (alcm.size() > 0) {
+											for (CiudadModel cm : alcm) {
+												%>
+												<tr>
+													<td align="center"><%= cm.getNombre() %></td>
+													<td align="center"><%= cm.getTiempo() %></td>
+													<td align="center"><%= Double.toString(cm.getTemperatura()) %> Cº</td>
+													<td align="center"><%= Double.toString(cm.getTemperaturaMaxima()) %> Cº</td>
+													<td align="center"><%= Double.toString(cm.getTemperaturaMinima()) %> Cº</td>
+													<td align="center"><%= Double.toString(cm.getVelocidadViento()) %> Km/h</td>
+													<td align="center"><%= Double.toString(cm.getHumedad()) %> %</td>
+													<td align="center">
+														<form action="quitarfavoritos" method="post">
+															<input type="hidden" name="nombreCiudad" value="<%= cm.getNombre() %>">
+															<input type="hidden" name="emailUsuario" value="<jsp:getProperty property="email" name="usuario"/>">
+															<button type="submit"><img alt="icono quitar favoritos" height="23" width="23" src="./img/cruz-roja-marca.png"></button>
+														</form>
+													</td>
+												</tr>
+												<%
+											}
 										}
-									}
-									%>
-								</tbody>
-							</table>
+										%>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
