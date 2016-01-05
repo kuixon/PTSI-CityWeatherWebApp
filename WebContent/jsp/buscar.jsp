@@ -90,7 +90,17 @@
 						<ul class="list-group">
 							<li class="list-group-item list-group-item-success">
 								<h4 class="list-group-item-heading">Weather</h4>
-								<p class="list-group-item-text"><jsp:getProperty property="tiempo" name="ciudad"/></p>
+								<ul>
+									<%
+									CiudadModel cm = (CiudadModel) session.getAttribute("ciudad");
+									String [] descTiempo = cm.getTiempo().split("#");
+									int i = 0;
+									while (i < descTiempo.length) {
+										%><li><strong><%= descTiempo[i] %></strong>: <%= descTiempo[i+1] %>.</li><%
+										i += 2;
+									}
+									%>		
+								</ul>
 							</li>
 							<li class="list-group-item list-group-item-info">
 								<h4 class="list-group-item-heading">Current temperature</h4>
@@ -120,7 +130,6 @@
 						<h1>Favorites</h1>
 						<%
 						if (!um.getNombreUsuario().isEmpty() && !um.getEmail().isEmpty() && !um.getContraseña().isEmpty()) {
-							CiudadModel cm = (CiudadModel) session.getAttribute("ciudad");
 							
 							if (cm.isFavoritos()) {
 								%>

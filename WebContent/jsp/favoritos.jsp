@@ -66,7 +66,18 @@
 												%>
 												<tr>
 													<td align="center"><%= cm.getNombre() %></td>
-													<td align="center"><%= cm.getTiempo() %></td>
+													<td align="center">
+														<ul>
+															<%
+															String [] descTiempo = cm.getTiempo().split("#");
+															int i = 0;
+															while (i < descTiempo.length) {
+																%><li><strong><%= descTiempo[i] %></strong>: <%= descTiempo[i+1] %>.</li><%
+																i += 2;
+															}
+															%>
+														</ul>
+													</td>
 													<td align="center"><%= Double.toString(cm.getTemperatura()) %> Cº</td>
 													<td align="center"><%= Double.toString(cm.getTemperaturaMaxima()) %> Cº</td>
 													<td align="center"><%= Double.toString(cm.getTemperaturaMinima()) %> Cº</td>
