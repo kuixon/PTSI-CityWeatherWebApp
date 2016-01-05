@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <jsp:useBean id="usuario" class="Models.UsuarioModel" scope="session"></jsp:useBean>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 	<head>
 		<title>City Weather Web App</title>
 		<meta charset="ISO-8859-1">
@@ -17,10 +17,10 @@
 					$("#contraseñaTexto").slideToggle("slow",function () {
 				    });
 					
-					if ($("#contraseñaBoton").val() == 'Mostrar contraseña') {
-						$("#contraseñaBoton").prop('value', 'Ocultar contraseña');
+					if ($("#contraseñaBoton").val() == 'Show password') {
+						$("#contraseñaBoton").prop('value', 'Hide password');
 					} else {
-						$("#contraseñaBoton").prop('value', 'Mostrar contraseña');
+						$("#contraseñaBoton").prop('value', 'Show password');
 					}
 			    });
 			});
@@ -32,14 +32,14 @@
 				<div class="container-fluid">
 					<ul class="nav navbar-nav navbar-left">
 						<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-						<li><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
+						<li><a href="/CityWeatherWebApp/index">Home<span class="sr-only">(current)</span></a></li>
 					</ul>
 					<div class="nav navbar-nav navbar-right">
 						<div class="btn-group">
-							<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Entrar</a>
+							<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Sign In</a>
 						</div>
 						<div class="btn-group">
-							<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Registrarse</a>
+							<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Sign Up</a>
 						</div>
 					</div>
 				</div>
@@ -51,13 +51,13 @@
 				<div class="col-xs-4">
 					<div class="well_transparente">
 						<div class="alert alert-success" role="alert">
-							<h1>¡Enhorabuena <jsp:getProperty property="nombreUsuario" name="usuario"/>!</h1>
-							<h3>Te has registrado correctamente con los siguientes datos:</h3>
+							<h1>Congratulations <jsp:getProperty property="nombreUsuario" name="usuario"/>!</h1>
+							<h3>You have successfully signed up with the following information:</h3>
 							<ul class="list-group">
-								<li class="list-group-item list-group-item-warning"><strong>Nombre de usuario</strong>: <jsp:getProperty property="nombreUsuario" name="usuario"/></li>
+								<li class="list-group-item list-group-item-warning"><strong>Username</strong>: <jsp:getProperty property="nombreUsuario" name="usuario"/></li>
 								<li class="list-group-item list-group-item-info"><strong>Email</strong>: <jsp:getProperty property="email" name="usuario"/></li>
-								<li class="list-group-item list-group-item-danger"><strong>Contraseña</strong>: <input type="button" value="Mostrar contraseña" class="btn btn-default" id="contraseñaBoton" /> </li>
-								<li class="list-group-item" id="contraseñaTexto" style="display: none;">La contraseña elegida en el registro ha sido: <strong><jsp:getProperty property="contraseña" name="usuario"/></strong></li>
+								<li class="list-group-item list-group-item-danger"><strong>Password</strong>: <input type="button" value="Show password" class="btn btn-default" id="contraseñaBoton" /> </li>
+								<li class="list-group-item" id="contraseñaTexto" style="display: none;">The password chosen in the Sign Up form has been: <strong><jsp:getProperty property="contraseña" name="usuario"/></strong></li>
 							</ul>
 						</div>
 					</div>
@@ -70,7 +70,7 @@
 				<div class="container-fluid">
 					<ul class="nav navbar-nav navbar-left">
 						<li><a class="navbar-brand"><img alt="icono copyright" height="23" width="23" src="./img/copyright-icon.png"></a></li>
-						<li><p class="navbar-text">Creado por Endika Salgueiro Barqu&iacute;n</p></li>
+						<li><p class="navbar-text">Created by Endika Salgueiro Barquin</p></li>
 					</ul>
 				</div>
 			</nav>

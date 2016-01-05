@@ -5,7 +5,7 @@
 <jsp:useBean id="usuario" class="Models.UsuarioModel" scope="session"></jsp:useBean>
 <jsp:useBean id="ciudad" class="Models.CiudadModel" scope="session"></jsp:useBean>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 	<head>
 		<title>City Weather Web App</title>
 		<meta charset="ISO-8859-1">
@@ -25,8 +25,8 @@
 						%>
 						<ul class="nav navbar-nav navbar-left">
 							<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-							<li><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
-							<li><a href="/CityWeatherWebApp/favoritos?email=<jsp:getProperty property="email" name="usuario"/>">Ciudades favoritas</a></li>
+							<li><a href="/CityWeatherWebApp/index">Home<span class="sr-only">(current)</span></a></li>
+							<li><a href="/CityWeatherWebApp/favoritos?email=<jsp:getProperty property="email" name="usuario"/>">My Favorite Cities</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li><a><jsp:getProperty property="nombreUsuario" name="usuario"/></a></li>
@@ -37,14 +37,14 @@
 						%>
 						<ul class="nav navbar-nav navbar-left">
 							<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-							<li><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
+							<li><a href="/CityWeatherWebApp/index">Home<span class="sr-only">(current)</span></a></li>
 						</ul>
 						<div class="nav navbar-nav navbar-right">
 							<div class="btn-group">
-								<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Entrar</a>
+								<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Sign In</a>
 							</div>
 							<div class="btn-group">
-								<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Registrarse</a>
+								<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Sign Up</a>
 							</div>
 						</div>
 						<%
@@ -57,27 +57,27 @@
 			<div class="row">
 				<div class="col-xs-4">
 					<div class="well_transparente">
-						<h1>Sobre <jsp:getProperty property="nombre" name="ciudad"/></h1>
+						<h1>About <jsp:getProperty property="nombre" name="ciudad"/></h1>
 						<div class="table-responsive">
 							<table class="table table-bordered">
 								<thead>
 									<tr>
-										<td><strong>Informaci&oacute;n</strong></td>
-										<td><strong>Enlace</strong></td>
+										<td><strong>Information</strong></td>
+										<td><strong>Link</strong></td>
 									</tr>
 								</thead>
 								<tbody>
 									<tr class="info">
-										<td>Informaci&oacute;n de la ciudad</td>
-										<td><a href="https://es.wikipedia.org/wiki/<jsp:getProperty property="nombre" name="ciudad"/>" target="_blank">Link</a></td>
+										<td>Information about the city</td>
+										<td><a href="https://es.wikipedia.org/wiki/<jsp:getProperty property="nombre" name="ciudad"/>" target="_blank">URL</a></td>
 									</tr>
 									<tr class="success">
-										<td>Noticias de la ciudad</td>
-										<td><a href="http://edition.cnn.com/search/?text=<jsp:getProperty property="nombre" name="ciudad"/>" target="_blank">Link</a></td>
+										<td>News related with the city</td>
+										<td><a href="http://edition.cnn.com/search/?text=<jsp:getProperty property="nombre" name="ciudad"/>" target="_blank">URL</a></td>
 									</tr>
 									<tr class="warning">
-										<td>Busqueda general</td>
-										<td><a href="https://www.google.es/#q=<jsp:getProperty property="nombre" name="ciudad"/>" target="_blank">Link</a></td>
+										<td>General search</td>
+										<td><a href="https://www.google.es/#q=<jsp:getProperty property="nombre" name="ciudad"/>" target="_blank">URL</a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -86,30 +86,30 @@
 				</div>
 				<div class="col-xs-4">
 					<div class="well_transparente">
-						<h1>Sobre la situaci&oacute;n metereol&oacute;gica actual</h1>
+						<h1>About the current weather situation</h1>
 						<ul class="list-group">
 							<li class="list-group-item list-group-item-success">
-								<h4 class="list-group-item-heading">Tiempo</h4>
+								<h4 class="list-group-item-heading">Weather</h4>
 								<p class="list-group-item-text"><jsp:getProperty property="tiempo" name="ciudad"/></p>
 							</li>
 							<li class="list-group-item list-group-item-info">
-								<h4 class="list-group-item-heading">Temperatura actual</h4>
+								<h4 class="list-group-item-heading">Current temperature</h4>
 								<p class="list-group-item-text"><jsp:getProperty property="temperatura" name="ciudad"/> Cº</p>
 							</li>
 							<li class="list-group-item list-group-item-info">
-								<h4 class="list-group-item-heading">Temperatura m&aacute;xima</h4>
+								<h4 class="list-group-item-heading">Maximum temperature</h4>
 								<p class="list-group-item-text"><jsp:getProperty property="temperaturaMaxima" name="ciudad"/> Cº</p>
 							</li>
 							<li class="list-group-item list-group-item-info">
-								<h4 class="list-group-item-heading">Temperatura m&iacute;nima</h4>
+								<h4 class="list-group-item-heading">Minimum temperature</h4>
 								<p class="list-group-item-text"><jsp:getProperty property="temperaturaMinima" name="ciudad"/> Cº</p>
 							</li>
 							<li class="list-group-item list-group-item-danger">
-								<h4 class="list-group-item-heading">Velocidad del viento</h4>
+								<h4 class="list-group-item-heading">Wind speed</h4>
 								<p class="list-group-item-text"><jsp:getProperty property="velocidadViento" name="ciudad"/> Km/h</p>
 							</li>
 							<li class="list-group-item list-group-item-warning">
-								<h4 class="list-group-item-heading">Humedad</h4>
+								<h4 class="list-group-item-heading">Humidity</h4>
 								<p class="list-group-item-text"><jsp:getProperty property="humedad" name="ciudad"/> %</p>
 							</li>
 						</ul>
@@ -117,23 +117,23 @@
 				</div>
 				<div class="col-xs-4">
 					<div class="well_transparente">
-						<h1>Favoritos</h1>
+						<h1>Favorites</h1>
 						<%
 						if (!um.getNombreUsuario().isEmpty() && !um.getEmail().isEmpty() && !um.getContraseña().isEmpty()) {
 							CiudadModel cm = (CiudadModel) session.getAttribute("ciudad");
 							
 							if (cm.isFavoritos()) {
 								%>
-								<h3>Pulsa el siguiente bot&oacute;n para quitar la ciudad '<jsp:getProperty property="nombre" name="ciudad"/>' de tu lista de favoritos.</h3>
+								<h3>Click the following button to remove the city '<jsp:getProperty property="nombre" name="ciudad"/>' from your favorite cities list.</h3>
 								<form action="quitarfavoritos" method="post">
 									<input type="hidden" name="nombreCiudad" value="<jsp:getProperty property="nombre" name="ciudad"/>">
 									<input type="hidden" name="emailUsuario" value="<jsp:getProperty property="email" name="usuario"/>">
-									<button type="submit" class="btn btn-default">Quitar ciudad</button>
+									<button type="submit" class="btn btn-default">Remove city</button>
 								</form>
 								<%
 							} else {
 								%>
-								<h3>Pulsa el siguiente bot&oacute;n para añadir la ciudad '<jsp:getProperty property="nombre" name="ciudad"/>' a tu lista de favoritos.</h3>
+								<h3>Click the following button to add the city '<jsp:getProperty property="nombre" name="ciudad"/>' to your favorite cities list.</h3>
 								<form action="añadirfavoritos" method="post">
 									<input type="hidden" name="email" value="<jsp:getProperty property="email" name="usuario"/>">
 									<input type="hidden" name="nombre" value="<jsp:getProperty property="nombre" name="ciudad"/>">
@@ -143,13 +143,13 @@
 									<input type="hidden" name="temperaturaMinima" value="<jsp:getProperty property="temperaturaMinima" name="ciudad"/>">
 									<input type="hidden" name="velocidadViento" value="<jsp:getProperty property="velocidadViento" name="ciudad"/>">
 									<input type="hidden" name="humedad" value="<jsp:getProperty property="humedad" name="ciudad"/>">
-									<button type="submit" class="btn btn-default">Añadir ciudad</button>
+									<button type="submit" class="btn btn-default">Add city</button>
 								</form>							
 								<%
 							}	
 						} else {
 							%>
-							<h3>Entra en el sistema para poder ver el apartado de favoritos.</h3>
+							<h3>Sign In to see this section.</h3>
 							<%
 						}
 						%>
@@ -162,7 +162,7 @@
 				<div class="container-fluid">
 					<ul class="nav navbar-nav navbar-left">
 						<li><a class="navbar-brand"><img alt="icono copyright" height="23" width="23" src="./img/copyright-icon.png"></a></li>
-						<li><p class="navbar-text">Creado por Endika Salgueiro Barqu&iacute;n</p></li>
+						<li><p class="navbar-text">Created by Endika Salgueiro Barquin</p></li>
 					</ul>
 				</div>
 			</nav>

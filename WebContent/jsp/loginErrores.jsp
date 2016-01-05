@@ -4,7 +4,7 @@
     pageEncoding="ISO-8859-1"%>
 <jsp:useBean id="usuario" class="Models.UsuarioModel" scope="session"></jsp:useBean>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 	<head>
 		<title>City Weather Web App</title>
 		<meta charset="ISO-8859-1">
@@ -19,14 +19,14 @@
 				<div class="container-fluid">
 					<ul class="nav navbar-nav navbar-left">
 						<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-						<li><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
+						<li><a href="/CityWeatherWebApp/index">Home<span class="sr-only">(current)</span></a></li>
 					</ul>
 					<div class="nav navbar-nav navbar-right">
 						<div class="btn-group">
-							<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Entrar</a>
+							<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Sign In</a>
 						</div>
 						<div class="btn-group">
-							<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Registrarse</a>
+							<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Sign Up</a>
 						</div>
 					</div>
 				</div>
@@ -45,16 +45,16 @@
 								
 								if (!um.getNombreUsuario().equals("")) {
 									%>
-									<h3 align="justify">La contraseña introducida para el usuario con email '<jsp:getProperty property="email" name="usuario"/>' es incorrecta.</h3>
+									<h3 align="justify">The password entered for the user with email '<jsp:getProperty property="email" name="usuario"/>' is not correct.</h3>
 									<input type="hidden" name="email" value="<jsp:getProperty property="email" name="usuario"/>">
-									<p>Pulsa el siguiente bot&oacute;n para volver al formulario:</p>
-							  		<button type="submit" class="btn btn-default">Formulario entrada</button>
+									<p>Click the following button to return to the form:</p>
+							  		<button type="submit" class="btn btn-default">Sign In form</button>
 									<%
 								} else {
 									%>
-									<h3 align="justify">No existe nig&uacute;n usuario en el sistema asociado al email '<jsp:getProperty property="email" name="usuario"/>'.</h3>
-									<p>Pulsa el siguiente bot&oacute;n para volver al formulario:</p>
-							  		<button type="submit" class="btn btn-default">Formulario entrada</button>
+									<h3 align="justify">There are no users in the system associated to the email '<jsp:getProperty property="email" name="usuario"/>'.</h3>
+									<p>Click the following button to return to the form:</p>
+							  		<button type="submit" class="btn btn-default">Sign In form</button>
 									<%
 								}
 								%>
@@ -70,7 +70,7 @@
 				<div class="container-fluid">
 					<ul class="nav navbar-nav navbar-left">
 						<li><a class="navbar-brand"><img alt="icono copyright" height="23" width="23" src="./img/copyright-icon.png"></a></li>
-						<li><p class="navbar-text">Creado por Endika Salgueiro Barqu&iacute;n</p></li>
+						<li><p class="navbar-text">Created by Endika Salgueiro Barquin</p></li>
 					</ul>
 				</div>
 			</nav>

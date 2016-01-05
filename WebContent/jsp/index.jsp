@@ -3,7 +3,7 @@
 <%@page import="Models.UsuarioModel"%>
 <jsp:useBean id="usuario" class="Models.UsuarioModel" scope="session"></jsp:useBean>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 	<head>
 		<title>City Weather Web App</title>
 		<meta charset="ISO-8859-1">
@@ -23,8 +23,8 @@
 						%>
 						<ul class="nav navbar-nav navbar-left">
 							<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-							<li class="active"><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
-							<li><a href="/CityWeatherWebApp/favoritos?email=<jsp:getProperty property="email" name="usuario"/>">Ciudades favoritas</a></li>
+							<li class="active"><a href="/CityWeatherWebApp/index">Home<span class="sr-only">(current)</span></a></li>
+							<li><a href="/CityWeatherWebApp/favoritos?email=<jsp:getProperty property="email" name="usuario"/>">My Favorite Cities</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li><a><jsp:getProperty property="nombreUsuario" name="usuario"/></a></li>
@@ -35,14 +35,14 @@
 						%>
 						<ul class="nav navbar-nav navbar-left">
 							<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-							<li class="active"><a href="/CityWeatherWebApp/index">Inicio<span class="sr-only">(current)</span></a></li>
+							<li class="active"><a href="/CityWeatherWebApp/index">Home<span class="sr-only">(current)</span></a></li>
 						</ul>
 						<div class="nav navbar-nav navbar-right">
 							<div class="btn-group">
-								<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Entrar</a>
+								<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Sign In</a>
 							</div>
 							<div class="btn-group">
-								<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Registrarse</a>
+								<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Sign Up</a>
 							</div>
 						</div>
 						<%
@@ -56,23 +56,23 @@
 				<div class="col-xs-12">
 					<div class="well_transparente">
 						<div class="panel panel-primary">
-							<div class="panel-heading">Buscador</div>
+							<div class="panel-heading">Searcher</div>
 							<div class="panel-body">
-								<h2 align="center">Busca la ciudad que desees para obtener su situaci&oacute;n meteorol&oacute;gica actual</h2>
+								<h2 align="center">Search the city which you wish to obtain its current weather situation.</h2>
 								<%
 								if (!um.getNombreUsuario().isEmpty() && !um.getEmail().isEmpty() && !um.getContraseña().isEmpty()) {
 									%>
-									<h3 align="center">Adem&aacute;s, podr&aacute;s añadir ciudades a tu lista de favoritos en caso de que dispongas ya de una cuenta.</h3>
+									<h3 align="center">Also, you will be able to add cities to your favorite cities list when you have signed in.</h3>
 									<%
 								} else {
 									%>	
-									<h3 align="justify">Adem&aacute;s, podr&aacute;s añadir ciudades a tu lista de favoritos en caso de que dispongas ya de una cuenta. Si no es as&iacute;, <a href="/CityWeatherWebApp/registro">¡Reg&iacute;strate!</a></h3>
+									<h3 align="justify">Also, you will be able to add cities to your favorite cities list when you have signed in. If you do not have an account yet, <a href="/CityWeatherWebApp/registro">Sign Up!</a></h3>
 									<%
 								}
 								%>
 								<form action="buscar" method="post">
 									<div class="input-group">
-										<input type="text" name="nombreCiudad" class="form-control" placeholder="Introduce el nombre de la ciudad, por ejemplo: Bilbao">
+										<input type="text" name="nombreCiudad" class="form-control" placeholder="Put the name of the city you wish, for example: London">
 										<%
 										if (!um.getNombreUsuario().isEmpty() && !um.getEmail().isEmpty() && !um.getContraseña().isEmpty()) {
 											%>
@@ -85,7 +85,7 @@
 										}
 										%>
 										<span class="input-group-btn">
-									    	<button type="submit" class="btn btn-default">Buscar</button>
+									    	<button type="submit" class="btn btn-default">Search</button>
 										</span>
 									</div>
 								</form>
@@ -100,7 +100,7 @@
 				<div class="container-fluid">
 					<ul class="nav navbar-nav navbar-left">
 						<li><a class="navbar-brand"><img alt="icono copyright" height="23" width="23" src="./img/copyright-icon.png"></a></li>
-						<li><p class="navbar-text">Creado por Endika Salgueiro Barqu&iacute;n</p></li>
+						<li><p class="navbar-text">Created by Endika Salgueiro Barquin</p></li>
 					</ul>
 				</div>
 			</nav>
