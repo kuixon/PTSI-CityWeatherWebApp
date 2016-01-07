@@ -36,7 +36,24 @@
 					<div class="col-xs-12">
 						<h1>Those are your favorite cities <jsp:getProperty property="nombreUsuario" name="usuario"/></h1>
 						<div class="pull-right">
-							<button class="boton_reload"></button>
+							<form action="favoritos" method="post">
+								<% 
+								ArrayList<CiudadModel> alcm = (ArrayList<CiudadModel>) session.getAttribute("ciudades");
+								if (alcm.size() > 0) {
+									int cont = 1;
+									String nomCiudad = "";
+									for (CiudadModel cm : alcm) {
+										nomCiudad = "ciudad" + cont;
+										%>
+										<input type="hidden" name="<%= nomCiudad %>" value="<%= cm.getNombre() %>">
+										<%
+										cont++;
+									}
+								}
+								%>
+								<input type="hidden" name="emailUsuario" value="<jsp:getProperty property="email" name="usuario"/>">
+								<button type="submit" class="boton_reload"></button>
+							</form>
 						</div>
 						<div class="pull-right">
 							<h3>Refresh data: &nbsp;</h3>
@@ -60,7 +77,6 @@
 									</thead>
 									<tbody>
 										<%
-										ArrayList<CiudadModel> alcm = (ArrayList<CiudadModel>) session.getAttribute("ciudades");
 										if (alcm.size() > 0) {
 											for (CiudadModel cm : alcm) {
 												%>
