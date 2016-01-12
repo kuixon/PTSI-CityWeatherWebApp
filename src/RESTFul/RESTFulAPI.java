@@ -2,7 +2,12 @@ package RESTFul;
 
 import javax.ws.rs.core.MediaType;
 
+import Utilities.JSONException;
 import Utilities.JSONObject;
+import Utilities.JSONReader;
+
+import java.io.IOException;
+import java.util.Vector;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,17 +20,24 @@ public class RESTFulAPI {
 	@Path("/currentWeatherXML/{city}")
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	public CityWeather obtenerTiempoActualXML(@PathParam("city") String city) {
+	public CityWeather obtenerTiempoActualXML(@PathParam("city") String city) throws JSONException, IOException {
 		CityWeather cw = new CityWeather();
 		
-		//Inicializamos la ciudad
+		String ciudadQuery = city.replaceAll("\\s","");
+		JSONObject json = JSONReader.readJsonFromUrl("http://api.openweathermap.org/data/2.5/weather?q=" + ciudadQuery + "&units=metric&APPID=c62dd1a67db43c63b19e933e51028163");
+		
+		for (int i = 0; i < json.getJSONArray("weather").length(); i++) {
+			String tiempo = ((JSONObject) json.getJSONArray("weather").get(i)).getString("main")
+					+ ": " + ((JSONObject) json.getJSONArray("weather").get(i)).getString("description");
+			cw.getWeather().add(tiempo);
+		}
+		
 		cw.setName(city);
-		cw.setWeather("Sunny");
-		cw.setTemperature(20.2);
-		cw.setMaximumTemperature(24.5);
-		cw.setMinimumTemperature(15.3);
-		cw.setWindSpeed(30.1);
-		cw.setHumidity(55);
+		cw.setTemperature(json.getJSONObject("main").getDouble("temp"));
+		cw.setMaximumTemperature(json.getJSONObject("main").getDouble("temp_max"));
+		cw.setMinimumTemperature(json.getJSONObject("main").getDouble("temp_min"));
+		cw.setWindSpeed((json.getJSONObject("wind").getDouble("speed") * 3600) / 1000);
+		cw.setHumidity(json.getJSONObject("main").getDouble("humidity"));
 		
 		return cw;
 	}
@@ -33,41 +45,65 @@ public class RESTFulAPI {
 	@Path("/currentWeatherJSON/{city}")
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	public String obtenerTiempoActualJSON(@PathParam("city") String city) {
-		JSONObject json = new JSONObject();
+	public String obtenerTiempoActualJSON(@PathParam("city") String city) throws JSONException, IOException {
 		
-		//Inicializamos el Objeto json
-		json.put("name", city);
-		json.put("weather", "Sunny");
-		json.put("temperature", 20.2);
-		json.put("maximum temperature", 24.5);
-		json.put("minimum temperature", 15.3);
-		json.put("wind speed", 30.1);
-		json.put("humidity", 55);
+		String ciudadQuery = city.replaceAll("\\s","");
+		JSONObject json = JSONReader.readJsonFromUrl("http://api.openweathermap.org/data/2.5/weather?q=" + ciudadQuery + "&units=metric&APPID=c62dd1a67db43c63b19e933e51028163");
 		
-		return json.toString();
+		JSONObject jsonResult = new JSONObject();
+		
+		Vector<String> vs = new Vector<String>();
+		for (int i = 0; i < json.getJSONArray("weather").length(); i++) {
+			String tiempo = ((JSONObject) json.getJSONArray("weather").get(i)).getString("main")
+					+ ": " + ((JSONObject) json.getJSONArray("weather").get(i)).getString("description");
+			vs.add(tiempo);
+		}
+		
+		jsonResult.put("name", city);
+		jsonResult.put("weather", vs);
+		jsonResult.put("temperature", json.getJSONObject("main").getDouble("temp"));
+		jsonResult.put("maximum temperature", json.getJSONObject("main").getDouble("temp_max"));
+		jsonResult.put("minimum temperature", json.getJSONObject("main").getDouble("temp_min"));
+		jsonResult.put("wind speed", (json.getJSONObject("wind").getDouble("speed") * 3600) / 1000);
+		jsonResult.put("humidity", json.getJSONObject("main").getDouble("humidity"));
+		
+		return jsonResult.toString();
 	}
 	
 	@Path("/currentWeatherHTML/{city}")
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public String obtenerTiempoActualHTML(@PathParam("city") String city) {
+	public String obtenerTiempoActualHTML(@PathParam("city") String city) throws JSONException, IOException {
 		
-		//Inicializamos los valores del html
-		String weather = "Sunny";
-		String temperature = "20.2";
-		String maximumTemperatre = "24.5";
-		String minumumTemperature = "15.3";
-		String windSpeed = "30.1";
-		String humidity = "55";
+		String ciudadQuery = city.replaceAll("\\s","");
+		JSONObject json = JSONReader.readJsonFromUrl("http://api.openweathermap.org/data/2.5/weather?q=" + ciudadQuery + "&units=metric&APPID=c62dd1a67db43c63b19e933e51028163");
 		
-		String response = "<h1 align='center'>Current Weather Situation in " + city + "</h1>"
-							+ "<h2 align='center'>Weather:</h2><p align='center'>" + weather + "</p>"
-							+ "<h2 align='center'>Temperature:</h2><p align='center'>" + temperature + " C&#176;</p>"
-							+ "<h2 align='center'>Maximum temperature:</h2><p align='center'>" + maximumTemperatre + " C&#176;</p>"
-							+ "<h2 align='center'>Minimum temperature:</h2><p align='center'>" + minumumTemperature + " C&#176;</p>"
-							+ "<h2 align='center'>Wind speed:</h2><p align='center'>" + windSpeed + " Km/h</p>"
-							+ "<h2 align='center'>Humidity:</h2><p align='center'>" + humidity + " %</p>";
+		Vector<String> vs = new Vector<String>();
+		for (int i = 0; i < json.getJSONArray("weather").length(); i++) {
+			String tiempo = ((JSONObject) json.getJSONArray("weather").get(i)).getString("main")
+					+ ": " + ((JSONObject) json.getJSONArray("weather").get(i)).getString("description");
+			vs.add(tiempo);
+		}
+		
+		String weather = "<h2>Weather:</h2><ul>";
+		for (String s : vs) {
+			weather += "<li><p>" + s + "</p></li>";
+		}
+		weather += "</ul>";
+		
+		String temperature = Double.toString(json.getJSONObject("main").getDouble("temp"));
+		String maximumTemperatre = Double.toString(json.getJSONObject("main").getDouble("temp_max"));
+		String minumumTemperature = Double.toString(json.getJSONObject("main").getDouble("temp_min"));
+		String windSpeed = Double.toString((json.getJSONObject("wind").getDouble("speed") * 3600) / 1000);
+		String humidity = Double.toString(json.getJSONObject("main").getDouble("humidity"));
+		
+		String response = "<h1>Current Weather Situation in " + city + "</h1>"
+							+ weather
+							+ "<h2>Temperature:</h2><p>" + temperature + " C&#176;</p>"
+							+ "<h2>Maximum temperature:</h2><p>" + maximumTemperatre + " C&#176;</p>"
+							+ "<h2>Minimum temperature:</h2><p>" + minumumTemperature + " C&#176;</p>"
+							+ "<h2>Wind speed:</h2><p>" + windSpeed + " Km/h</p>"
+							+ "<h2>Humidity:</h2><p>" + humidity + " %</p>";
 		
 		return response;
 	}
