@@ -18,6 +18,7 @@
 					<ul class="nav navbar-nav navbar-left">
 						<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
 						<li><a href="/CityWeatherWebApp/index">Home<span class="sr-only">(current)</span></a></li>
+						<li><a href="/CityWeatherWebApp/html/doxygen/index.html" target="_blank">RESTFul API</a></li>
 					</ul>
 					<div class="nav navbar-nav navbar-right">
 						<div class="btn-group">
