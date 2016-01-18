@@ -1,4 +1,4 @@
-package Utilities;
+package es.deusto.ptsi.Utilities;
 
 /*
 Copyright (c) 2006 JSON.org

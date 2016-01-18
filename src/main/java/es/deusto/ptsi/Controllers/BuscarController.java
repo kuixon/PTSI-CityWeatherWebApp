@@ -1,4 +1,4 @@
-package Controllers;
+package es.deusto.ptsi.Controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Database.DatabaseManager;
-import Models.CiudadModel;
-import Models.UsuarioModel;
-import Utilities.JSONObject;
-import Utilities.JSONReader;
+import es.deusto.ptsi.Database.DatabaseManager;
+import es.deusto.ptsi.Models.CiudadModel;
+import es.deusto.ptsi.Models.UsuarioModel;
+import es.deusto.ptsi.Utilities.JSONObject;
+import es.deusto.ptsi.Utilities.JSONReader;
 
 @WebServlet(description = "Controller para la acción buscar.", urlPatterns = { "/buscar" })
 public class BuscarController extends HttpServlet {

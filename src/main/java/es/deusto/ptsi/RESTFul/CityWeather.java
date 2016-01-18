@@ -1,4 +1,4 @@
-package RESTFul;
+package es.deusto.ptsi.RESTFul;
 
 import java.util.Vector;
 

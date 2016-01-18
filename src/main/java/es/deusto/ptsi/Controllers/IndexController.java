@@ -1,4 +1,4 @@
-package Controllers;
+package es.deusto.ptsi.Controllers;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Models.UsuarioModel;
+import es.deusto.ptsi.Models.UsuarioModel;
 
 @WebServlet(description = "El controlador index.", urlPatterns = { "/index" })
 public class IndexController extends HttpServlet {

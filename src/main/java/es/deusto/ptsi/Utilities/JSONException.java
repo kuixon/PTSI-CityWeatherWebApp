@@ -1,4 +1,4 @@
-package Utilities;
+package es.deusto.ptsi.Utilities;
 
 /**
  * The JSONException is thrown by the JSON.org classes when things are amiss.

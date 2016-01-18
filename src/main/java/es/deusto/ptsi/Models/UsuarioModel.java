@@ -1,4 +1,4 @@
-package Models;
+package es.deusto.ptsi.Models;
 
 public class UsuarioModel {
 

@@ -1,10 +1,10 @@
-package RESTFul;
+package es.deusto.ptsi.RESTFul;
 
 import javax.ws.rs.core.MediaType;
 
-import Utilities.JSONException;
-import Utilities.JSONObject;
-import Utilities.JSONReader;
+import es.deusto.ptsi.Utilities.JSONException;
+import es.deusto.ptsi.Utilities.JSONObject;
+import es.deusto.ptsi.Utilities.JSONReader;
 
 import java.io.IOException;
 import java.util.Vector;

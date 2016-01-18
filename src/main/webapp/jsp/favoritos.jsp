@@ -1,9 +1,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="Models.UsuarioModel"%>
-<%@page import="Models.CiudadModel"%>
-<jsp:useBean id="usuario" class="Models.UsuarioModel" scope="session"></jsp:useBean>
+<%@page import="es.deusto.ptsi.Models.UsuarioModel"%>
+<%@page import="es.deusto.ptsi.Models.CiudadModel"%>
+<jsp:useBean id="usuario" class="es.deusto.ptsi.Models.UsuarioModel" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

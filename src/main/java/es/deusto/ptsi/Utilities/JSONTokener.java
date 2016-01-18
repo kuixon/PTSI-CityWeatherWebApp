@@ -1,4 +1,4 @@
-package Utilities;
+package es.deusto.ptsi.Utilities;
 
 import java.io.BufferedReader;
 import java.io.IOException;

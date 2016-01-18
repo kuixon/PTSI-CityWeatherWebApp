@@ -1,8 +1,8 @@
-<%@page import="Database.DatabaseManager"%>
-<%@page import="Models.UsuarioModel"%>
+<%@page import="es.deusto.ptsi.Database.DatabaseManager"%>
+<%@page import="es.deusto.ptsi.Models.UsuarioModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<jsp:useBean id="usuario" class="Models.UsuarioModel" scope="session"></jsp:useBean>
+<jsp:useBean id="usuario" class="es.deusto.ptsi.Models.UsuarioModel" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

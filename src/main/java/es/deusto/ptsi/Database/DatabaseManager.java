@@ -1,4 +1,4 @@
-package Database;
+package es.deusto.ptsi.Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Models.CiudadModel;
-import Models.UsuarioModel;
+import es.deusto.ptsi.Models.CiudadModel;
+import es.deusto.ptsi.Models.UsuarioModel;
 
 public class DatabaseManager {
 	
