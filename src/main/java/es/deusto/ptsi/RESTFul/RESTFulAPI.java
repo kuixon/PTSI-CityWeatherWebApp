@@ -5,6 +5,8 @@ import javax.ws.rs.core.MediaType;
 import es.deusto.ptsi.Utilities.JSONException;
 import es.deusto.ptsi.Utilities.JSONObject;
 import es.deusto.ptsi.Utilities.JSONReader;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -14,21 +16,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-/**This class is the RESTFul API of this web app called CityWeatherWebApp.
- * @author Endika Salgueiro Barquin
- *
- */
-@Path("/api")
+@Path("/home")
+@Api(value="API RESTful", description="This is the RESTFul API of this web app called CityWeatherWebApp.")
 public class RESTFulAPI {
 	
-	/**With this method we can obtain the current weather situation of the city we want. To call this method,
-	 * we only have to request the following URI: http://localhost:8080/CityWeatherWebApp/rest/api/currentWeatherXML/'NameOfTheCityWeWant'.
-	 * @param city The name of the city which we want to obtain its current weather situation.
-	 * @return This method returns a XML file which contains the current weather situation of the city which is passed by parameter.
-	 */
 	@Path("/currentWeatherXML/{city}")
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
+	@ApiOperation(value="With this method we can obtain the current weather situation of the city we want in XML format.")
 	public CityWeather obtainCurrentWeatherSituationXML(@PathParam("city") String city) throws JSONException, IOException {
 		CityWeather cw = new CityWeather();
 		
@@ -51,14 +46,10 @@ public class RESTFulAPI {
 		return cw;
 	}
 	
-	/**With this method we can obtain the current weather situation of the city we want. To call this method,
-	 * we only have to request the following URI: http://localhost:8080/CityWeatherWebApp/rest/api/currentWeatherJSON/'NameOfTheCityWeWant'
-	 * @param city The name of the city which we want to obtain its current weather situation.
-	 * @return This method returns a JSON file which contains the current weather situation of the city which is passed by parameter.
-	 */
 	@Path("/currentWeatherJSON/{city}")
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
+	@ApiOperation(value="With this method we can obtain the current weather situation of the city we want in JSON format.")
 	public String obtainCurrentWeatherSituationJSON(@PathParam("city") String city) throws JSONException, IOException {
 		
 		String ciudadQuery = city.replaceAll("\\s","");
@@ -84,14 +75,10 @@ public class RESTFulAPI {
 		return jsonResult.toString();
 	}
 	
-	/**With this method we can obtain the current weather situation of the city we want. To call this method,
-	 * we only have to request the following URI: http://localhost:8080/CityWeatherWebApp/rest/api/currentWeatherHTML/'NameOfTheCityWeWant'
-	 * @param city The name of the city which we want to obtain its current weather situation.
-	 * @return This method returns a HTML file which contains the current weather situation of the city which is passed by parameter.
-	 */
 	@Path("/currentWeatherHTML/{city}")
 	@GET
 	@Produces(MediaType.TEXT_HTML)
+	@ApiOperation(value="With this method we can obtain the current weather situation of the city we want in HTML format.")
 	public String obtainCurrentWeatherSituationHTML(@PathParam("city") String city) throws JSONException, IOException {
 		
 		String ciudadQuery = city.replaceAll("\\s","");
