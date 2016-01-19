@@ -24,7 +24,7 @@
 						<ul class="nav navbar-nav navbar-left">
 							<li><a class="navbar-brand" href="/index">City Weather Web App</a></li>
 							<li class="active"><a href="/index">Home<span class="sr-only">(current)</span></a></li>
-							<li><a href="http://localhost:8080/swagger/index.html" target="_blank">RESTful API</a></li>
+							<li><a href="/swagger/index.html" target="_blank">RESTful API</a></li>
 							<li><a href="/favoritos?email=<jsp:getProperty property="email" name="usuario"/>">My Favorite Cities</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
@@ -37,7 +37,7 @@
 						<ul class="nav navbar-nav navbar-left">
 							<li><a class="navbar-brand" href="/index">City Weather Web App</a></li>
 							<li class="active"><a href="/index">Home<span class="sr-only">(current)</span></a></li>
-							<li><a href="http://localhost:8080/swagger/index.html" target="_blank">RESTful API</a></li>
+							<li><a href="/swagger/index.html" target="_blank">RESTful API</a></li>
 						</ul>
 						<div class="nav navbar-nav navbar-right">
 							<div class="btn-group">
