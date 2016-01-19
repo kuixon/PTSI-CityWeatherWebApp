@@ -18,16 +18,16 @@
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container-fluid">
 					<ul class="nav navbar-nav navbar-left">
-						<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-						<li><a href="/CityWeatherWebApp/index">Home<span class="sr-only">(current)</span></a></li>
-						<li><a href="/CityWeatherWebApp/html/doxygen/index.html" target="_blank">RESTFul API</a></li>
+						<li><a class="navbar-brand" href="/index">City Weather Web App</a></li>
+						<li><a href="/index">Home<span class="sr-only">(current)</span></a></li>
+						<li><a href="http://localhost:8080/swagger/index.html" target="_blank">RESTful API</a></li>
 					</ul>
 					<div class="nav navbar-nav navbar-right">
 						<div class="btn-group">
-							<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Sign In</a>
+							<a type="button" class="btn btn-success navbar-btn" href="/entrar">Sign In</a>
 						</div>
 						<div class="btn-group">
-							<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Sign Up</a>
+							<a type="button" class="btn btn-danger navbar-btn" href="/registro">Sign Up</a>
 						</div>
 					</div>
 				</div>

@@ -1,19 +1,19 @@
 package es.deusto.ptsi.Models;
 
-public class UsuarioModel {
+public class UsuarioModel implements java.io.Serializable {
 
 	private String nombreUsuario;
 	private String email;
-	private String contraseña;
+	private String password;
 	
 	public UsuarioModel() {
 		
 	}
 	
-	public UsuarioModel(String nombreUsuario, String email, String contraseña) {
+	public UsuarioModel(String nombreUsuario, String email, String password) {
 		this.nombreUsuario = nombreUsuario;
 		this.email = email;
-		this.contraseña = contraseña;
+		this.password = password;
 	}
 	
 	public String getNombreUsuario() {
@@ -32,12 +32,12 @@ public class UsuarioModel {
 		this.email = email;
 	}
 	
-	public String getContraseña() {
-		return contraseña;
+	public String getPassword() {
+		return password;
 	}
 	
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

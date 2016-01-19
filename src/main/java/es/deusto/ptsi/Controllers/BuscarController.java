@@ -37,7 +37,7 @@ public class BuscarController extends HttpServlet {
 		} else {
 			um.setNombreUsuario("");
 			um.setEmail("");
-			um.setContraseña("");
+			um.setPassword("");
 		}
 		
 		String ciudadQuery = nombreCiudad.replaceAll("\\s","");

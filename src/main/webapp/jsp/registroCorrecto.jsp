@@ -13,14 +13,14 @@
 		<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$("#contraseñaBoton").click(function() {
-					$("#contraseñaTexto").slideToggle("slow",function () {
+				$("#passwordBoton").click(function() {
+					$("#passwordTexto").slideToggle("slow",function () {
 				    });
 					
-					if ($("#contraseñaBoton").val() == 'Show password') {
-						$("#contraseñaBoton").prop('value', 'Hide password');
+					if ($("#passwordBoton").val() == 'Show password') {
+						$("#passwordBoton").prop('value', 'Hide password');
 					} else {
-						$("#contraseñaBoton").prop('value', 'Show password');
+						$("#passwordBoton").prop('value', 'Show password');
 					}
 			    });
 			});
@@ -31,16 +31,16 @@
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container-fluid">
 					<ul class="nav navbar-nav navbar-left">
-						<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-						<li><a href="/CityWeatherWebApp/index">Home<span class="sr-only">(current)</span></a></li>
-						<li><a href="/CityWeatherWebApp/html/doxygen/index.html" target="_blank">RESTFul API</a></li>
+						<li><a class="navbar-brand" href="/index">City Weather Web App</a></li>
+						<li><a href="/index">Home<span class="sr-only">(current)</span></a></li>
+						<li><a href="http://localhost:8080/swagger/index.html" target="_blank">RESTful API</a></li>
 					</ul>
 					<div class="nav navbar-nav navbar-right">
 						<div class="btn-group">
-							<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Sign In</a>
+							<a type="button" class="btn btn-success navbar-btn" href="/entrar">Sign In</a>
 						</div>
 						<div class="btn-group">
-							<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Sign Up</a>
+							<a type="button" class="btn btn-danger navbar-btn" href="/registro">Sign Up</a>
 						</div>
 					</div>
 				</div>
@@ -57,8 +57,8 @@
 							<ul class="list-group">
 								<li class="list-group-item list-group-item-warning"><strong>Username</strong>: <jsp:getProperty property="nombreUsuario" name="usuario"/></li>
 								<li class="list-group-item list-group-item-info"><strong>Email</strong>: <jsp:getProperty property="email" name="usuario"/></li>
-								<li class="list-group-item list-group-item-danger"><strong>Password</strong>: <input type="button" value="Show password" class="btn btn-default" id="contraseñaBoton" /> </li>
-								<li class="list-group-item" id="contraseñaTexto" style="display: none;">The password chosen in the Sign Up form has been: <strong><jsp:getProperty property="contraseña" name="usuario"/></strong></li>
+								<li class="list-group-item list-group-item-danger"><strong>Password</strong>: <input type="button" value="Show password" class="btn btn-default" id="passwordBoton" /> </li>
+								<li class="list-group-item" id="passwordTexto" style="display: none;">The password chosen in the Sign Up form has been: <strong><jsp:getProperty property="password" name="usuario"/></strong></li>
 							</ul>
 						</div>
 					</div>

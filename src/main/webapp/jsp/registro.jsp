@@ -16,16 +16,16 @@
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container-fluid">
 					<ul class="nav navbar-nav navbar-left">
-						<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-						<li><a href="/CityWeatherWebApp/index">Home<span class="sr-only">(current)</span></a></li>
-						<li><a href="/CityWeatherWebApp/html/doxygen/index.html" target="_blank">RESTFul API</a></li>
+						<li><a class="navbar-brand" href="/index">City Weather Web App</a></li>
+						<li><a href="/index">Home<span class="sr-only">(current)</span></a></li>
+						<li><a href="http://localhost:8080/swagger/index.html" target="_blank">RESTful API</a></li>
 					</ul>
 					<div class="nav navbar-nav navbar-right">
 						<div class="btn-group">
-							<a type="button" class="btn btn-success navbar-btn" href="/CityWeatherWebApp/entrar">Sign In</a>
+							<a type="button" class="btn btn-success navbar-btn" href="/entrar">Sign In</a>
 						</div>
 						<div class="btn-group">
-							<a type="button" class="btn btn-danger navbar-btn" href="/CityWeatherWebApp/registro">Sign Up</a>
+							<a type="button" class="btn btn-danger navbar-btn" href="/registro">Sign Up</a>
 						</div>
 					</div>
 				</div>
@@ -49,8 +49,8 @@
 								    	<input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<jsp:getProperty property="email" name="usuario"/>" required>
 								  	</div>
 									<div class="form-group">
-								    	<label for="contraseña">Password</label>
-								    	<input type="password" name="contraseña" class="form-control" id="contraseña" placeholder="Password" value="<jsp:getProperty property="contraseña" name="usuario"/>" required>
+								    	<label for="password">Password</label>
+								    	<input type="password" name="password" class="form-control" id="password" placeholder="Password" value="<jsp:getProperty property="password" name="usuario"/>" required>
 								  	</div>
 									<button type="submit" class="btn btn-default">Sign Up</button>
 								</form>

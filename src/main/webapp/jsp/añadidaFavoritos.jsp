@@ -17,14 +17,13 @@
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container-fluid">
 					<ul class="nav navbar-nav navbar-left">
-						<li><a class="navbar-brand" href="/CityWeatherWebApp/index">City Weather Web App</a></li>
-						<li><a href="/CityWeatherWebApp/index">Home<span class="sr-only">(current)</span></a></li>
-						<li><a href="/CityWeatherWebApp/html/doxygen/index.html" target="_blank">RESTFul API</a></li>
-						<li><a href="/CityWeatherWebApp/favoritos?email=<jsp:getProperty property="email" name="usuario"/>">My Favorite Cities</a></li>
+						<li><a class="navbar-brand" href="/index">City Weather Web App</a></li>
+						<li><a href="/index">Home<span class="sr-only">(current)</span></a></li>
+						<li><a href="/favoritos?email=<jsp:getProperty property="email" name="usuario"/>">My Favorite Cities</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a><jsp:getProperty property="nombreUsuario" name="usuario"/></a></li>
-						<li><a href="entrar?action=logout">Logout</a></li>
+						<li><a href="/entrar?action=logout">Logout</a></li>
 					</ul>
 				</div>
 			</nav>

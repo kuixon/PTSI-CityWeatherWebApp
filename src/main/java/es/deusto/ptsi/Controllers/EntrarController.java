@@ -36,11 +36,11 @@ public class EntrarController extends HttpServlet {
 			email = "";
 		}
 		
-		String contraseña;
-		if(request.getParameter("contraseña") != null) {
-			contraseña = request.getParameter("contraseña");
+		String password;
+		if(request.getParameter("password") != null) {
+			password = request.getParameter("password");
 		} else {
-			contraseña = "";
+			password = "";
 		}
 		
 		UsuarioModel um = null;
@@ -48,12 +48,12 @@ public class EntrarController extends HttpServlet {
 		if (action == null) {
 			um = checkCookie(request);
 			if (um == null) {
-				um = new UsuarioModel(nombreUsuario, email, contraseña);
+				um = new UsuarioModel(nombreUsuario, email, password);
 				sesion.setAttribute("usuario", um);
 				request.getRequestDispatcher("jsp/entrar.jsp").forward(request, response);
 			} else {
 				try {
-					if (DatabaseManager.getInstance().loginUsuario(um.getEmail(), um.getContraseña())) {
+					if (DatabaseManager.getInstance().loginUsuario(um.getEmail(), um.getPassword())) {
 						sesion.setAttribute("usuario", um);
 						request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
 					} else {
@@ -78,7 +78,7 @@ public class EntrarController extends HttpServlet {
 						response.addCookie(ck);
 					}
 				}
-				um = new UsuarioModel(nombreUsuario, email, contraseña);
+				um = new UsuarioModel(nombreUsuario, email, password);
 				sesion.setAttribute("usuario", um);
 				request.getRequestDispatcher("jsp/entrar.jsp").forward(request, response);
 			}
@@ -91,16 +91,16 @@ public class EntrarController extends HttpServlet {
 		if(cookies == null) {
 			return null;
 		} else {
-			String email = "", contraseña = "";
+			String email = "", password = "";
 			for (Cookie ck : cookies) {
 				if (ck.getName().equalsIgnoreCase("username"))
 					email = ck.getValue();
 				if (ck.getName().equalsIgnoreCase("password"))
-					contraseña = ck.getValue();
+					password = ck.getValue();
 			}
-			if (!email.isEmpty() && !contraseña.isEmpty()) {
+			if (!email.isEmpty() && !password.isEmpty()) {
 				try {
-					um = new UsuarioModel(DatabaseManager.getInstance().obtenerUsuario(email).getNombreUsuario(), email, contraseña);
+					um = new UsuarioModel(DatabaseManager.getInstance().obtenerUsuario(email).getNombreUsuario(), email, password);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -116,18 +116,18 @@ public class EntrarController extends HttpServlet {
 		
 		if (action == null) {
 			String email = request.getParameter("email").trim();
-			String contraseña = request.getParameter("contraseña").trim();
+			String password = request.getParameter("password").trim();
 			
 			try {
 				UsuarioModel um = DatabaseManager.getInstance().obtenerUsuario(email);
 				if (um != null) {
 					
-					if (DatabaseManager.getInstance().loginUsuario(email, contraseña)) {
+					if (DatabaseManager.getInstance().loginUsuario(email, password)) {
 						sesion.setAttribute("usuario", um);
 						Cookie ckEmail = new Cookie("username", um.getEmail());
 						ckEmail.setMaxAge(3600);
 						response.addCookie(ckEmail);
-						Cookie ckContraseña = new Cookie("password", um.getContraseña());
+						Cookie ckContraseña = new Cookie("password", um.getPassword());
 						ckContraseña.setMaxAge(3600);
 						response.addCookie(ckContraseña);
 						request.getRequestDispatcher("jsp/index.jsp").forward(request, response);

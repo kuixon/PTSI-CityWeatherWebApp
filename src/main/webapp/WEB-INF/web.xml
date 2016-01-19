@@ -7,14 +7,49 @@
 		<welcome-file>jsp/redirect.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>
-		<servlet-name>Jersey Web Application</servlet-name>
-		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-		<init-param>
-			<param-name>jersey.config.server.provider.packages</param-name>
-			<param-value>es.deusto.ptsi.RESTFul</param-value>
-		</init-param>
+		<servlet-name>AñadirFavoritosController</servlet-name>
+		<servlet-class>es.deusto.ptsi.Controllers.AñadirFavoritosController</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>BuscarController</servlet-name>
+		<servlet-class>es.deusto.ptsi.Controllers.BuscarController</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>EntrarController</servlet-name>
+		<servlet-class>es.deusto.ptsi.Controllers.EntrarController</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>FavoritosController</servlet-name>
+		<servlet-class>es.deusto.ptsi.Controllers.FavoritosController</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>IndexController</servlet-name>
+		<servlet-class>es.deusto.ptsi.Controllers.IndexController</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>QuitarFavoritosController</servlet-name>
+		<servlet-class>es.deusto.ptsi.Controllers.QuitarFavoritosController</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>RegistroController</servlet-name>
+		<servlet-class>es.deusto.ptsi.Controllers.RegistroController</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+        <servlet-name>Jersey Web Application</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>io.swagger.jaxrs.listing, es.deusto.ptsi</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 	<servlet>
         <servlet-name>Jersey2Config</servlet-name>
         <servlet-class>io.swagger.jersey.config.JerseyJaxrsConfig</servlet-class>
@@ -24,7 +59,7 @@
         </init-param>
         <init-param>
             <param-name>swagger.api.basepath</param-name>
-            <param-value>http://localhost:8080/CityWeatherWebApp/webapi</param-value>
+            <param-value>http://localhost:8080/webapi</param-value>
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
@@ -32,15 +67,32 @@
         <servlet-name>Jersey Web Application</servlet-name>
         <url-pattern>/webapi/*</url-pattern>
     </servlet-mapping>
-	<filter>
-		<filter-name>ObjectifyFilter</filter-name>
-	<filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>ObjectifyFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<listener>
-		<listener-class>OfyHelper</listener-class>
-	</listener>
+    <servlet-mapping>
+    	<servlet-name>AñadirFavoritosController</servlet-name>
+    	<url-pattern>/añadirfavoritos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>BuscarController</servlet-name>
+    	<url-pattern>/buscar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>EntrarController</servlet-name>
+    	<url-pattern>/entrar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>FavoritosController</servlet-name>
+    	<url-pattern>/favoritos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IndexController</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>QuitarFavoritosController</servlet-name>
+    	<url-pattern>/quitarfavoritos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>RegistroController</servlet-name>
+    	<url-pattern>/registro</url-pattern>
+    </servlet-mapping>
 </web-app>

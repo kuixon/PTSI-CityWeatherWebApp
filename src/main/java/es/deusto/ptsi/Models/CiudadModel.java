@@ -1,6 +1,6 @@
 package es.deusto.ptsi.Models;
 
-public class CiudadModel {
+public class CiudadModel implements java.io.Serializable {
 	
 	private String nombre;
 	private String tiempo;

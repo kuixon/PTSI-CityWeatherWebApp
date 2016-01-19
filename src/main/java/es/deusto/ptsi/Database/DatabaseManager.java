@@ -64,7 +64,7 @@ public class DatabaseManager {
 				Statement stmt = con.createStatement();
 				stmt.executeUpdate("INSERT INTO usuarios(nombreUsuario,email,contrasena) "
 						+ "VALUES('" + um.getNombreUsuario() + "','" + um.getEmail() + "',"
-								+ "'" + um.getContraseña() + "')");
+								+ "'" + um.getPassword() + "')");
 				System.out.println("Usuario insertado correctamente en la base de datos.");
 			}
 		} catch (ClassNotFoundException e) {
@@ -279,14 +279,14 @@ public class DatabaseManager {
 		}
 	}
 	
-	public boolean loginUsuario(String email, String contraseña) throws SQLException {
+	public boolean loginUsuario(String email, String password) throws SQLException {
 		try {
 			cerrarConexion();
 			if(establecerConexion()) {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT contrasena FROM usuarios WHERE email = '" + email + "'");
 				if (rs.next()) {
-					if (rs.getString(1).equals(contraseña)) {
+					if (rs.getString(1).equals(password)) {
 						return true;
 					} else {
 						return false;

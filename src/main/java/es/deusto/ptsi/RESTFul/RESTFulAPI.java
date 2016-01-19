@@ -7,6 +7,8 @@ import es.deusto.ptsi.Utilities.JSONObject;
 import es.deusto.ptsi.Utilities.JSONReader;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -16,8 +18,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-@Path("/home")
-@Api(value="API RESTful", description="This is the RESTFul API of this web app called CityWeatherWebApp.")
+@Path("/RESTfulAPI")
+@Api(value="RESTfulAPI", description="This is the RESTFul API of this web app called CityWeatherWebApp.")
 public class RESTFulAPI {
 	
 	@Path("/currentWeatherXML/{city}")

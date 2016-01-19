@@ -35,17 +35,17 @@ public class RegistroController extends HttpServlet {
 			email = "";
 		}
 		
-		String contraseña;
-		if(request.getParameter("contraseña") != null) {
-			contraseña = request.getParameter("contraseña");
+		String password;
+		if(request.getParameter("password") != null) {
+			password = request.getParameter("password");
 		} else {
-			contraseña = "";
+			password = "";
 		}
 		
 		UsuarioModel um = null;
 		
 		if (EntrarController.checkCookie(request) == null) {
-			um = new UsuarioModel(nombreUsuario, email, contraseña);
+			um = new UsuarioModel(nombreUsuario, email, password);
 			sesion.setAttribute("usuario", um);
 			request.getRequestDispatcher("jsp/registro.jsp").forward(request, response);
 		} else {
@@ -61,9 +61,9 @@ public class RegistroController extends HttpServlet {
 		
 		String nombreUsuario = request.getParameter("nombreUsuario");
 		String email = request.getParameter("email");
-		String contraseña = request.getParameter("contraseña");
+		String password = request.getParameter("password");
 		
-		UsuarioModel um = new UsuarioModel(nombreUsuario, email, contraseña);
+		UsuarioModel um = new UsuarioModel(nombreUsuario, email, password);
 		
 		try {
 			if (DatabaseManager.getInstance().obtenerUsuario(email) != null) {
