@@ -7,15 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.google.appengine.api.utils.SystemProperty;
+
 import es.deusto.ptsi.Models.CiudadModel;
 import es.deusto.ptsi.Models.UsuarioModel;
 
 public class DatabaseManager {
 	
 	private static DatabaseManager instance = null;
-	private static String STRING_CON = "jdbc:mysql://localhost:3306/cityweatherwebappdb";
-	private static String USUARIO = "root";
-	private static String CONTRASEÑA = "";
 	private Connection con = null;
 	
 	private DatabaseManager() {
@@ -35,9 +34,23 @@ public class DatabaseManager {
 	
 	public boolean establecerConexion() throws ClassNotFoundException {
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(STRING_CON, USUARIO, CONTRASEÑA);
+			String url = null;
+			if (SystemProperty.environment.value() ==
+			    SystemProperty.Environment.Value.Production) {
+				// Connecting from App Engine.
+				// Load the class that provides the "jdbc:google:mysql://"
+				// prefix.
+				Class.forName("com.mysql.jdbc.GoogleDriver");
+				url = "jdbc:google:mysql://cityweatherwebapp:bd-cityweatherwebapp/cityweatherwebapp-db?user=endika&password=78952922v";
+			} else {
+				// Connecting from an external network.
+				System.out.println("ENTROOOOOOOOOOOOOOOOOOOOOO");
+				DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+				Class.forName("com.mysql.jdbc.Driver");
+				url = "jdbc:mysql://173.194.107.200:3306/cityweatherwebapp-db?user=endika&password=78952922v";
+			}
+
+			con = DriverManager.getConnection(url);
 			System.out.println("Se establece la conexión con la base de datos");
 			return true;
 		} catch (SQLException e) {

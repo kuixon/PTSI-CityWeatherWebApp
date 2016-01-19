@@ -116,7 +116,7 @@ Copyright 2015 Google Inc. All Rights Reserved.
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.0.8</version>
+			<version>5.1.38</version>
 		</dependency>
 	</dependencies>
   <build>
