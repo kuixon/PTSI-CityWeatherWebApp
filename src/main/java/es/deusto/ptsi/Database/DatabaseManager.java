@@ -44,7 +44,6 @@ public class DatabaseManager {
 				url = "jdbc:google:mysql://cityweatherwebapp:bd-cityweatherwebapp/cityweatherwebapp-db?user=endika&password=78952922v";
 			} else {
 				// Connecting from an external network.
-				System.out.println("ENTROOOOOOOOOOOOOOOOOOOOOO");
 				DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 				Class.forName("com.mysql.jdbc.Driver");
 				url = "jdbc:mysql://173.194.107.200:3306/cityweatherwebapp-db?user=endika&password=78952922v";
