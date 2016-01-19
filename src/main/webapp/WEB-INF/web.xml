@@ -59,7 +59,7 @@
         </init-param>
         <init-param>
             <param-name>swagger.api.basepath</param-name>
-            <param-value>http://localhost:8080/webapi</param-value>
+            <param-value>http://cityweatherwebapp.appspot.com/webapi</param-value>
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
