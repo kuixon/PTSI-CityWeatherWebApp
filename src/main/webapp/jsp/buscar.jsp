@@ -145,7 +145,7 @@
 							} else {
 								%>
 								<h3>Click the following button to add the city '<jsp:getProperty property="nombre" name="ciudad"/>' to your favorite cities list.</h3>
-								<form action="añadirfavoritos" method="post">
+								<form action="anadirfavoritos" method="post">
 									<input type="hidden" name="email" value="<jsp:getProperty property="email" name="usuario"/>">
 									<input type="hidden" name="nombre" value="<jsp:getProperty property="nombre" name="ciudad"/>">
 									<input type="hidden" name="tiempo" value="<jsp:getProperty property="tiempo" name="ciudad"/>">

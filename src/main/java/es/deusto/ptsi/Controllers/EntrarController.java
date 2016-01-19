@@ -127,9 +127,9 @@ public class EntrarController extends HttpServlet {
 						Cookie ckEmail = new Cookie("username", um.getEmail());
 						ckEmail.setMaxAge(3600);
 						response.addCookie(ckEmail);
-						Cookie ckContraseña = new Cookie("password", um.getPassword());
-						ckContraseña.setMaxAge(3600);
-						response.addCookie(ckContraseña);
+						Cookie ckContrasena = new Cookie("password", um.getPassword());
+						ckContrasena.setMaxAge(3600);
+						response.addCookie(ckContrasena);
 						request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
 					} else {
 						sesion.setAttribute("usuario", um);

@@ -7,8 +7,8 @@
 		<welcome-file>jsp/redirect.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>
-		<servlet-name>AñadirFavoritosController</servlet-name>
-		<servlet-class>es.deusto.ptsi.Controllers.AñadirFavoritosController</servlet-class>
+		<servlet-name>AnadirFavoritosController</servlet-name>
+		<servlet-class>es.deusto.ptsi.Controllers.AnadirFavoritosController</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet>
@@ -68,8 +68,8 @@
         <url-pattern>/webapi/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-    	<servlet-name>AñadirFavoritosController</servlet-name>
-    	<url-pattern>/añadirfavoritos</url-pattern>
+    	<servlet-name>AnadirFavoritosController</servlet-name>
+    	<url-pattern>/anadirfavoritos</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>BuscarController</servlet-name>

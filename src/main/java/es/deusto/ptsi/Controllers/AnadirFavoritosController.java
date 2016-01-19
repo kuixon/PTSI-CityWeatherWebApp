@@ -14,8 +14,8 @@ import es.deusto.ptsi.Database.DatabaseManager;
 import es.deusto.ptsi.Models.CiudadModel;
 import es.deusto.ptsi.Models.UsuarioModel;
 
-@WebServlet(description = "Controlador para añadir ciudades favoritos.", urlPatterns = { "/añadirfavoritos" })
-public class AñadirFavoritosController extends HttpServlet {
+@WebServlet(description = "Controlador para añadir ciudades favoritos.", urlPatterns = { "/anadirfavoritos" })
+public class AnadirFavoritosController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -55,7 +55,7 @@ public class AñadirFavoritosController extends HttpServlet {
 		
 		sesion.setAttribute("usuario", um);
 		sesion.setAttribute("ciudad", cm);
-		request.getRequestDispatcher("jsp/añadidaFavoritos.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/anadidaFavoritos.jsp").forward(request, response);
 	}
 
 }
