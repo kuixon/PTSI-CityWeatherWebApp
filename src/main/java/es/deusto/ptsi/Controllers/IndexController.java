@@ -1,6 +1,7 @@
 package es.deusto.ptsi.Controllers;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,6 @@ public class IndexController extends HttpServlet {
 		HttpSession sesion = request.getSession();
 		
 		UsuarioModel um = null;
-		
 		if (EntrarController.checkCookie(request) == null) {
 			um = new UsuarioModel("", "", "");
 			sesion.setAttribute("usuario", um);
@@ -31,9 +31,4 @@ public class IndexController extends HttpServlet {
 			request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
 		}
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-	
 }

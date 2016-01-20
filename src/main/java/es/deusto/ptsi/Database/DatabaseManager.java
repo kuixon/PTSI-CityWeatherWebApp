@@ -8,21 +8,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.google.appengine.api.utils.SystemProperty;
+import java.util.logging.Logger;
 
 import es.deusto.ptsi.Models.CiudadModel;
 import es.deusto.ptsi.Models.UsuarioModel;
 
 public class DatabaseManager {
 	
+	private static final Logger log = Logger.getLogger(DatabaseManager.class.getName());
 	private static DatabaseManager instance = null;
 	private Connection con = null;
 	
 	private DatabaseManager() {
-		try {
-			establecerConexion();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		
 	}
 	
 	public static DatabaseManager getInstance() {
@@ -41,7 +39,7 @@ public class DatabaseManager {
 				// Load the class that provides the "jdbc:google:mysql://"
 				// prefix.
 				Class.forName("com.mysql.jdbc.GoogleDriver");
-				url = "jdbc:google:mysql://cityweatherwebapp:bd-cityweatherwebapp/cityweatherwebapp-db?user=endika&password=78952922v";
+				url = "jdbc:google:mysql://cityweatherwebapp:bd-cityweatherwebapp/cityweatherwebapp-db?user=root&password=1234";
 			} else {
 				// Connecting from an external network.
 				DriverManager.registerDriver(new com.mysql.jdbc.Driver());
@@ -50,44 +48,32 @@ public class DatabaseManager {
 			}
 
 			con = DriverManager.getConnection(url);
-			System.out.println("Se establece la conexión con la base de datos");
+			log.info("Se establece la conexión con la base de datos");
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("ERROR al establecer la conexión con la base de datos");
+			log.info("ERROR: " + e.getMessage());
 			return false;
-		}
-	}
-	
-	public void cerrarConexion() {
-		try {
-			con.close();
-			System.out.println("Se cierra la conexion con la base de datos.");
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("ERROR al cerrar la conexión con la base de datos");
 		}
 	}
 	
 	public void insertarUsuario(UsuarioModel um) throws SQLException {
 		try {
-			cerrarConexion();
 			if (establecerConexion()) {
 				Statement stmt = con.createStatement();
 				stmt.executeUpdate("INSERT INTO usuarios(nombreUsuario,email,contrasena) "
 						+ "VALUES('" + um.getNombreUsuario() + "','" + um.getEmail() + "',"
 								+ "'" + um.getPassword() + "')");
-				System.out.println("Usuario insertado correctamente en la base de datos.");
+				log.info("Usuario insertado correctamente en la base de datos.");
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("ERROR al insertar un usuario en la base de datos.");
+			log.info("ERROR: " + e.getMessage());
 		}
 	}
 	
 	public void insertarCiudad(CiudadModel cm) throws SQLException {
 		try {
-			cerrarConexion();
 			if (establecerConexion()) {
 				Statement stmt = con.createStatement();
 				stmt.executeUpdate("INSERT INTO ciudades(nombreCiudad,tiempo,temperatura,"
@@ -96,32 +82,30 @@ public class DatabaseManager {
 						+ Double.toString(cm.getTemperatura()) + "," + Double.toString(cm.getTemperaturaMaxima()) +
 						"," + Double.toString(cm.getTemperaturaMinima()) + "," + Double.toString(cm.getVelocidadViento())
 						+ "," + Double.toString(cm.getHumedad()) + ")");
-				System.out.println("Ciudad insertada correctamente en la base de datos.");
+				log.info("Ciudad insertada correctamente en la base de datos.");
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("ERROR al insertar una ciudad en la base de datos.");
+			log.info("ERROR: " + e.getMessage());
 		}
 	}
 	
 	public void insertarRelacion(int idusuario, int idciudad) throws SQLException {
 		try {
-			cerrarConexion();
 			if (establecerConexion()) {
 				Statement stmt = con.createStatement();
 				stmt.executeUpdate("INSERT INTO usuariosciudades(idUsuarios,idCiudades) "
 						+ "VALUES(" + Integer.toString(idusuario) + "," + Integer.toString(idciudad) + ")");
-				System.out.println("Relación insertada correctamente en la base de datos.");
+				log.info("Relación insertada correctamente en la base de datos.");
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("ERROR al insertar la relación en la base de datos.");
+			log.info("ERROR: " + e.getMessage());
 		}
 	}
 	
 	public int obtenerIdUsuarioPorEmail(String email) throws SQLException {
 		try {
-			cerrarConexion();
 			if (establecerConexion()) {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT idUsuarios FROM usuarios WHERE email = '" + email + "'");
@@ -136,14 +120,13 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("Error a la hora de establecer la conexión.");
+			log.info("ERROR: " + e.getMessage());
 			return 0;
 		}
 	}
 	
 	public int obtenerIdCiudadPorNombre(String nombre) throws SQLException {
 		try {
-			cerrarConexion();
 			if (establecerConexion()) {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT idCiudades FROM ciudades WHERE nombreCiudad = '" + nombre + "'");
@@ -158,14 +141,13 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("Error a la hora de establecer la conexión.");
+			log.info("ERROR: " + e.getMessage());
 			return 0;
 		}
 	}
 	
 	public UsuarioModel obtenerUsuario(String email) throws SQLException {
 		try {
-			cerrarConexion();
 			if (establecerConexion()) {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios WHERE email = '" + email + "'");
@@ -180,14 +162,13 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("Error a la hora de establecer la conexión.");
+			log.info("ERROR: " + e.getMessage());
 			return null;
 		}
 	}
 	
 	public CiudadModel obtenerCiudad(String nombreCiudad) throws SQLException {
 		try {
-			cerrarConexion();
 			if (establecerConexion()) {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT * FROM ciudades WHERE nombreCiudad = '" + nombreCiudad + "'");
@@ -204,7 +185,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("Error a la hora de establecer la conexión.");
+			log.info("ERROR: " + e.getMessage());
 			return null;
 		}
 	}
@@ -212,7 +193,6 @@ public class DatabaseManager {
 	public ArrayList<CiudadModel> obtenerCiudadesUsuario(int idusuario) throws SQLException {
 		ArrayList<CiudadModel> alcm = new ArrayList<CiudadModel>();
 		try {
-			cerrarConexion();
 			if (establecerConexion()) {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT * FROM ciudades c INNER JOIN usuariosciudades uc ON"
@@ -229,14 +209,13 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("Error a la hora de establecer la conexión.");
+			log.info("ERROR: " + e.getMessage());
 			return null;
 		}
 	}
 	
 	public void actualizarCiudad(CiudadModel cm) throws SQLException {
 		try {
-			cerrarConexion();
 			if (establecerConexion()) {
 				int idciudad = obtenerIdCiudadPorNombre(cm.getNombre());
 				Statement stmt = con.createStatement();
@@ -245,33 +224,31 @@ public class DatabaseManager {
 						+ " temperaturaMaxima = " + Double.toString(cm.getTemperaturaMaxima()) + ", temperaturaMinima = "
 						+ Double.toString(cm.getTemperaturaMinima()) + ", velocidadViento = " + Double.toString(cm.getVelocidadViento()) + ", "
 						+ "humedad = " + Double.toString(cm.getHumedad()) + " WHERE idCiudades = " + Integer.toString(idciudad));
-				System.out.println("Ciudad " + cm.getNombre() + " actualizada correctamente.");
-			} else {
-				System.out.println("Error al establecer la conexión.");
+				log.info("Ciudad " + cm.getNombre() + " actualizada correctamente.");
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			log.info("ERROR: " + e.getMessage());
 		}
 	}
 	
 	public void eliminarRelacion(int idusuario, int idciudad) throws SQLException {
 		try {
-			cerrarConexion();
 			if (establecerConexion()) {
 				Statement stmt = con.createStatement();
 				int filasAfectadas = stmt.executeUpdate("DELETE FROM usuariosciudades WHERE idUsuarios = " + Integer.toString(idusuario) + 
 						" AND idCiudades = " + Integer.toString(idciudad));
-				System.out.println("La relación fue borrada correctamente. En total " + Integer.toString(filasAfectadas) + 
+				log.info("La relación fue borrada correctamente. En total " + Integer.toString(filasAfectadas) + 
 						" filas han sido eliminadas.");
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			log.info("ERROR: " + e.getMessage());
 		}
 	}
 	
 	public boolean existeRelacion(int idusuario, int idciudad) throws SQLException {
 		try {
-			cerrarConexion();
 			if (establecerConexion()) {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT * FROM usuariosciudades WHERE idUsuarios = " + Integer.toString(idusuario) +
@@ -281,19 +258,17 @@ public class DatabaseManager {
 				} else {
 					return false;
 				}
-			} else {
-				System.out.println("No se ha establecido la conexión.");
-				return false;
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			log.info("ERROR: " + e.getMessage());
 			return false;
 		}
+		return false;
 	}
 	
 	public boolean loginUsuario(String email, String password) throws SQLException {
 		try {
-			cerrarConexion();
 			if(establecerConexion()) {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT contrasena FROM usuarios WHERE email = '" + email + "'");
@@ -311,7 +286,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("Error a la hora de establecer la conexión.");
+			log.info("ERROR: " + e.getMessage());
 			return false;
 		}
 	}
