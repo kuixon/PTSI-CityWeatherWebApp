@@ -66,6 +66,7 @@ public class RegistroController extends HttpServlet {
 		UsuarioModel um = new UsuarioModel(nombreUsuario, email, password);
 		
 		try {
+			DatabaseManager.getInstance().establecerConexion();
 			if (DatabaseManager.getInstance().obtenerUsuario(email) != null) {
 				sesion.setAttribute("usuario", um);
 				request.getRequestDispatcher("jsp/registroErrores.jsp").forward(request, response);
@@ -74,8 +75,8 @@ public class RegistroController extends HttpServlet {
 				sesion.setAttribute("usuario", um);
 				request.getRequestDispatcher("jsp/registroCorrecto.jsp").forward(request, response);
 			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 

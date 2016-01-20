@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
 
 import es.deusto.ptsi.Database.DatabaseManager;
 import es.deusto.ptsi.Models.CiudadModel;
@@ -31,10 +32,11 @@ public class FavoritosController extends HttpServlet {
 		int idusuario = 0;
 		ArrayList<CiudadModel> alcm = new ArrayList<CiudadModel>();
 		try {
+			DatabaseManager.getInstance().establecerConexion();
 			um = DatabaseManager.getInstance().obtenerUsuario(emailUsuarioLogueado);
 			idusuario = DatabaseManager.getInstance().obtenerIdUsuarioPorEmail(emailUsuarioLogueado);
 			alcm = DatabaseManager.getInstance().obtenerCiudadesUsuario(idusuario);
-		} catch (SQLException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		
@@ -52,8 +54,9 @@ public class FavoritosController extends HttpServlet {
 		UsuarioModel um = new UsuarioModel();
 		
 		try {
+			DatabaseManager.getInstance().establecerConexion();
 			um = DatabaseManager.getInstance().obtenerUsuario(emailUsuarioLogueado);
-		} catch (SQLException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		
@@ -91,8 +94,9 @@ public class FavoritosController extends HttpServlet {
 				cont++;
 				
 				try {
+					DatabaseManager.getInstance().establecerConexion();
 					DatabaseManager.getInstance().actualizarCiudad(cm);
-				} catch (SQLException e) {
+				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 			} else {

@@ -35,6 +35,7 @@ public class AnadirFavoritosController extends HttpServlet {
 		CiudadModel cm = new CiudadModel(nombre, tiempo, temperatura, temperaturaMaxima, temperaturaMinima, velocidadViento, humedad, false);
 		UsuarioModel um = new UsuarioModel();
 		try {
+			DatabaseManager.getInstance().establecerConexion();
 			um = DatabaseManager.getInstance().obtenerUsuario(email);
 			int idusuario = DatabaseManager.getInstance().obtenerIdUsuarioPorEmail(um.getEmail());
 			if (DatabaseManager.getInstance().obtenerCiudad(nombre) != null) {
@@ -49,7 +50,7 @@ public class AnadirFavoritosController extends HttpServlet {
 				int idciudad = DatabaseManager.getInstance().obtenerIdCiudadPorNombre(cm.getNombre());
 				DatabaseManager.getInstance().insertarRelacion(idusuario, idciudad);
 			}
-		} catch (SQLException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		

@@ -30,8 +30,9 @@ public class BuscarController extends HttpServlet {
 		UsuarioModel um = new UsuarioModel();
 		if (!emailUsuarioLogin.equals("")) {
 			try {
+				DatabaseManager.getInstance().establecerConexion();
 				um = DatabaseManager.getInstance().obtenerUsuario(emailUsuarioLogin);
-			} catch (SQLException e) {
+			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 		} else {
@@ -62,6 +63,7 @@ public class BuscarController extends HttpServlet {
 		cm.setHumedad(json.getJSONObject("main").getDouble("humidity"));
 	    
 		try {
+			DatabaseManager.getInstance().establecerConexion();
 			if (DatabaseManager.getInstance().obtenerCiudad(nombreCiudad) != null) {
 				int idciudad = DatabaseManager.getInstance().obtenerIdCiudadPorNombre(nombreCiudad);
 				int idusuario = DatabaseManager.getInstance().obtenerIdUsuarioPorEmail(emailUsuarioLogin);
@@ -72,7 +74,7 @@ public class BuscarController extends HttpServlet {
 					cm.setFavoritos(false);
 				}
 			}
-		} catch (SQLException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		

@@ -53,6 +53,7 @@ public class EntrarController extends HttpServlet {
 				request.getRequestDispatcher("jsp/entrar.jsp").forward(request, response);
 			} else {
 				try {
+					DatabaseManager.getInstance().establecerConexion();
 					if (DatabaseManager.getInstance().loginUsuario(um.getEmail(), um.getPassword())) {
 						sesion.setAttribute("usuario", um);
 						request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
@@ -60,7 +61,7 @@ public class EntrarController extends HttpServlet {
 						sesion.setAttribute("usuario", um);
 						request.getRequestDispatcher("jsp/loginErrores.jsp").forward(request, response);
 					}
-				} catch (SQLException e) {
+				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 			}
@@ -100,8 +101,9 @@ public class EntrarController extends HttpServlet {
 			}
 			if (!email.isEmpty() && !password.isEmpty()) {
 				try {
+					DatabaseManager.getInstance().establecerConexion();
 					um = new UsuarioModel(DatabaseManager.getInstance().obtenerUsuario(email).getNombreUsuario(), email, password);
-				} catch (SQLException e) {
+				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 			}
@@ -119,6 +121,7 @@ public class EntrarController extends HttpServlet {
 			String password = request.getParameter("password").trim();
 			
 			try {
+				DatabaseManager.getInstance().establecerConexion();
 				UsuarioModel um = DatabaseManager.getInstance().obtenerUsuario(email);
 				if (um != null) {
 					
@@ -141,7 +144,7 @@ public class EntrarController extends HttpServlet {
 					sesion.setAttribute("usuario", um2);
 					request.getRequestDispatcher("jsp/loginErrores.jsp").forward(request, response);
 				}
-			} catch (SQLException e) {
+			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 			

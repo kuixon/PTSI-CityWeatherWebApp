@@ -28,13 +28,14 @@ public class QuitarFavoritosController extends HttpServlet {
 		UsuarioModel um = new UsuarioModel();
 		CiudadModel cm = new CiudadModel();
 		try {
+			DatabaseManager.getInstance().establecerConexion();
 			um = DatabaseManager.getInstance().obtenerUsuario(emailUsuario);
 			cm = DatabaseManager.getInstance().obtenerCiudad(nombreCiudad);
 			int idusuario = DatabaseManager.getInstance().obtenerIdUsuarioPorEmail(um.getEmail());
 			int idciudad = DatabaseManager.getInstance().obtenerIdCiudadPorNombre(cm.getNombre());
 			
 			DatabaseManager.getInstance().eliminarRelacion(idusuario, idciudad);
-		} catch (SQLException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		
