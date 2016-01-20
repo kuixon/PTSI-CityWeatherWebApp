@@ -52,7 +52,7 @@ public class DatabaseManager {
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR establecerConexion: " + e.getMessage());
 			return false;
 		}
 	}
@@ -68,7 +68,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR insertarUsuario: " + e.getMessage());
 		}
 	}
 	
@@ -86,7 +86,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR insertarCiudad: " + e.getMessage());
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR insertarRelacion: " + e.getMessage());
 		}
 	}
 	
@@ -111,6 +111,7 @@ public class DatabaseManager {
 				ResultSet rs = stmt.executeQuery("SELECT idUsuarios FROM usuarios WHERE email = '" + email + "'");
 				if (rs.next()) {
 					int id = rs.getInt("idUsuarios");
+					log.info("Id del usuario: " + id); 
 					return id;
 				} else {
 					return 0;
@@ -120,7 +121,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR obtenerIdUsuarioPorEmail: " + e.getMessage());
 			return 0;
 		}
 	}
@@ -132,6 +133,7 @@ public class DatabaseManager {
 				ResultSet rs = stmt.executeQuery("SELECT idCiudades FROM ciudades WHERE nombreCiudad = '" + nombre + "'");
 				if (rs.next()) {
 					int id = rs.getInt("idCiudades");
+					log.info("Id de la ciudad: " + id);
 					return id;
 				} else {
 					return 0;
@@ -141,7 +143,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR obtenerIdCiudadPorNombre: " + e.getMessage());
 			return 0;
 		}
 	}
@@ -153,6 +155,7 @@ public class DatabaseManager {
 				ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios WHERE email = '" + email + "'");
 				if (rs.next()) {
 					UsuarioModel um = new UsuarioModel(rs.getString("nombreUsuario"), rs.getString("email"), rs.getString("contrasena"));
+					log.info("Usuario: " + um.getNombreUsuario());
 					return um;
 				} else {
 					return null;
@@ -162,7 +165,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR obtenerUsuario: " + e.getMessage());
 			return null;
 		}
 	}
@@ -176,6 +179,7 @@ public class DatabaseManager {
 					CiudadModel cm = new CiudadModel(rs.getString("nombreCiudad"), rs.getString("tiempo"), rs.getDouble("temperatura"), 
 							rs.getDouble("temperaturaMaxima"), rs.getDouble("temperaturaMinima"), rs.getDouble("velocidadViento"), 
 							rs.getDouble("humedad"), false);
+					log.info("Ciudad: " + cm.getNombre());
 					return cm;
 				} else {
 					return null;
@@ -185,7 +189,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR obtenerCiudad: " + e.getMessage());
 			return null;
 		}
 	}
@@ -201,6 +205,7 @@ public class DatabaseManager {
 					CiudadModel cm = new CiudadModel(rs.getString("nombreCiudad"), rs.getString("tiempo"), rs.getDouble("temperatura"), 
 							rs.getDouble("temperaturaMaxima"), rs.getDouble("temperaturaMinima"), rs.getDouble("velocidadViento"), 
 							rs.getDouble("humedad"), false);
+					log.info("Ciudad " + cm.getNombre() + " añadida al arrayList.");
 					alcm.add(cm);
 				}
 				return alcm;
@@ -209,7 +214,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR obtenerCiudadesUsuario: " + e.getMessage());
 			return null;
 		}
 	}
@@ -228,7 +233,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR actualizarCiudad: " + e.getMessage());
 		}
 	}
 	
@@ -243,7 +248,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR eliminarRelacion: " + e.getMessage());
 		}
 	}
 	
@@ -254,14 +259,16 @@ public class DatabaseManager {
 				ResultSet rs = stmt.executeQuery("SELECT * FROM usuariosciudades WHERE idUsuarios = " + Integer.toString(idusuario) +
 					" AND idCiudades = " + Integer.toString(idciudad));
 				if (rs.next()) {
+					log.info("Si existe relacion.");
 					return true;
 				} else {
+					log.info("No existe relacion.");
 					return false;
 				}
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR existeRelacion: " + e.getMessage());
 			return false;
 		}
 		return false;
@@ -274,8 +281,10 @@ public class DatabaseManager {
 				ResultSet rs = stmt.executeQuery("SELECT contrasena FROM usuarios WHERE email = '" + email + "'");
 				if (rs.next()) {
 					if (rs.getString(1).equals(password)) {
+						log.info("Login correcto.");
 						return true;
 					} else {
+						log.info("Login incorrecto.");
 						return false;
 					}
 				} else {
@@ -286,7 +295,7 @@ public class DatabaseManager {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			log.info("ERROR: " + e.getMessage());
+			log.warning("ERROR loginUsuario: " + e.getMessage());
 			return false;
 		}
 	}
